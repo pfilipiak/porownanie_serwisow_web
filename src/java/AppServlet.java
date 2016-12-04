@@ -10,12 +10,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  *
  * @author Adrian
  */
-public class DemoServlet extends HttpServlet {
+public class AppServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,14 +27,16 @@ public class DemoServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processServletRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String qs = request.getQueryString();
-            String website = qs.substring(qs.indexOf('=')+1).trim();
-            APIDataConnector apdata = new APIDataConnector(website);
+            
+            String website = getValueQS("website",request.getQueryString());
+            String date = getValueQS("date",request.getQueryString());
+        
+            APIDataConnector apdata = new APIDataConnector(website, date);
             
             out.println("<!DOCTYPE html>");
             out.println("<html lang=\"pl\">");
@@ -44,7 +47,8 @@ public class DemoServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet DemoServlet at " + request.getContextPath() + "</h1>");
             out.println("<h2>QueryString: " + request.getQueryString()+ "</h2>");           
-            out.println("<h2>website: " + website + "</h2>");
+            out.println("<h3>website: " + website + "</h3>");
+            out.println("<h3>data: " + date + "</h3>");
             out.println("<p>Dane o raporcie:<br>");
             out.println("- miesiac raportu: " + apdata.getReportDate() + "<br>");
             out.println("- czy live: " + apdata.getIsLive() + "<br>");
@@ -54,7 +58,36 @@ public class DemoServlet extends HttpServlet {
             out.println("</html>");
         }
     }
+    
+    
+    protected void processRequestToReport1(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+            String website = getValueQS("website",request.getQueryString());
+            String date = getValueQS("date",request.getQueryString());
+            
+            APIDataConnector apdata = new APIDataConnector(website, date);
+            String[] table = apdata.GChartKeywordTableReport(website, date, 1000);
+            String tableHeader = table[0];
+            String tableContent = table[1];    
+            String posStats = table[2];    
+            String volStats = table[3];    
 
+            request.setAttribute("website", website); // This will be available as ${message}
+            request.setAttribute("date", date); // This will be available as ${date}
+            request.setAttribute("isLive", apdata.getIsLive()); //
+            request.setAttribute("reportSize", apdata.getReportSize()); //
+            request.setAttribute("tableHeader", tableHeader); //
+            request.setAttribute("tableContent", tableContent); //
+            request.setAttribute("posStats", posStats); //
+            request.setAttribute("volStats", volStats); //
+            request.getRequestDispatcher("/reportStat.jsp").forward(request, response);
+        }
+    }
+ 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -62,12 +95,18 @@ public class DemoServlet extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException if an I/O error occurs;
      */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String qs = request.getQueryString();
+        if (qs.contains("r=1")) {
+        processRequestToReport1(request, response);
+        } else {
+            processServletRequest(request, response);
+        }
     }
 
     /**
@@ -81,7 +120,7 @@ public class DemoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processServletRequest(request, response);
     }
 
     /**
@@ -94,4 +133,15 @@ public class DemoServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String getValueQS(String searchParam, String queryString){
+        String qs = "";
+        if (queryString != null && queryString.contains(searchParam)) {
+            qs = queryString.substring(queryString.indexOf(searchParam));
+            qs = qs.split("&")[0];
+            qs = qs.split("=")[1].trim();
+        }
+    
+    return qs;
+    }
+            
 }

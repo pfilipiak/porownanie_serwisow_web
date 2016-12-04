@@ -15,9 +15,13 @@
     <body>
         <h1>Hello World!</h1>
         <br>
-        <form action="DemoServlet">
-            <input type="text" name="website" value="ceneo.pl">
-            <input type="submit" value="login">
+        <form action="DemoServlet" method="get">
+            Live: <input type="text" name="website" value="ceneo.pl">
+            <input type="submit" value="check">
         </form>
+        <br>Historycznie:
+        <a href="./DemoServlet?website=redcoon.pl&date=201610">Redcoon X 2016</a>
+        <br>lub<br>
+        <a href="./DemoServlet?r=1&website=pwr.wroc.pl&date=201610">demo z raport 1</a>
     </body>
-</html>
+</htmle
