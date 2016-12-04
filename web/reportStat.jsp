@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+      
+    <link rel="stylesheet" type="text/css" href="./files/style.css">
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -81,6 +83,23 @@
   </head>
 
   <body>
+    <ul id="menu-bar">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Products</a>
+        <ul>
+            <li><a href="#">Products Sub Menu 1</a></li>
+            <li><a href="#">Products Sub Menu 2</a></li>
+        </ul>
+        </li>
+        <li><a href="#">Services</a>
+        <ul>
+            <li><a href="#">Services Sub Menu 1</a></li>
+            <li><a href="#">Services Sub Menu 2</a></li>
+        </ul>
+        </li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact Us</a></li>
+    </ul>   
     <!--Div that will hold the pie chart-->
 	<h2>raport1.jsp</h2>
         <p>Serwis: ${website}<br>
@@ -95,6 +114,6 @@
         </table>
         Lista 1000 fraz:
         <div id="table_div"></div>
-  </body>
+
   </body>
 </html>

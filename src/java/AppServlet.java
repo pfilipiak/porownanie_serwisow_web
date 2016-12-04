@@ -84,6 +84,7 @@ public class AppServlet extends HttpServlet {
             request.setAttribute("tableContent", tableContent); //
             request.setAttribute("posStats", posStats); //
             request.setAttribute("volStats", volStats); //
+            //request.getRequestDispatcher("/bootstrap/hello.jsp").forward(request, response);
             request.getRequestDispatcher("/reportStat.jsp").forward(request, response);
         }
     }
