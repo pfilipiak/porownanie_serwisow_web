@@ -24,7 +24,7 @@
                 
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script type="text/javascript">
-
+                    
                   // Load the Visualization API and the corechart package.
                   google.charts.load('current', {'packages':['corechart', 'table']});
 
@@ -100,11 +100,16 @@
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li class="active"><a href="index.html">Strona główna</a></li>
-                                                <li><a href="demo_dashboard.html">Analiza serwisu</a></li>
-                                                <li><a href="left-sidebar.html">Subskrypcja</a></li>    
-                                                <li><a href="left-sidebar.html">Trendy</a></li>
-                                                <li><a href="no-sidebar.html">Logowanie</a></li>
+						<li><a href="index.html">Strona główna</a></li>
+                                                <li class='active'><a href="./Reports?r=1&website=redcoon.pl&date=201610"">Analiza serwisu</a></li>
+                                                <li><a href="#">Subskrypcja</a></li>    
+                                                <li><a href="#">Trendy</a></li>
+                                                <li><a href="loginPage.html">Logowanie</a></li>
+                                                <li>
+                                                    <form action="Reports?r=1" method="get">
+                                                        <input type="text" name="website" placeholder="Analizuj domenę...">
+                                                    </form>
+                                                </li>
 					</ul>
 				</nav>
 			</div>
@@ -197,7 +202,7 @@
 		<div id="tweet">
 			<div class="container">
 				<section>
-					<blockquote>&ldquo;In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat.&rdquo;</blockquote>
+					<blockquote>&ldquo;Bo być w Internecie, to być albo nie być.&rdquo;</blockquote>
 				</section>
 			</div>
 		</div>
