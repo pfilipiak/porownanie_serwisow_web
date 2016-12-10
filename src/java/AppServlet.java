@@ -36,7 +36,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String date = getValueQS("date",request.getQueryString());
         
-            APIDataConnector apdata = new APIDataConnector(website, date);
+            APIDataConnector apdata = new APIDataConnector(website, date, "2fc1906300ddc89289961a1c3642a273");
             
             out.println("<!DOCTYPE html>");
             out.println("<html lang=\"pl\">");
@@ -69,7 +69,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String date = getValueQS("date",request.getQueryString());
             
-            APIDataConnector apdata = new APIDataConnector(website, date);
+            APIDataConnector apdata = new APIDataConnector(website, date, "2fc1906300ddc89289961a1c3642a273");
             String[] table = apdata.GChartKeywordTableReport(website, date, 1000);
             String tableHeader = table[0];
             String tableContent = table[1];    
@@ -88,6 +88,35 @@ public class AppServlet extends HttpServlet {
         }
     }
  
+    
+    protected void processRequestToBasicStats(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+            String website = getValueQS("website",request.getQueryString());
+
+            APIDataConnector apdata = new APIDataConnector(website, "live", "2fc1906300ddc89289961a1c3642a273");
+            String[] table = apdata.GChartBasicWebsiteStat(website, 2);
+            String tableStatsHeader = table[0];
+            String tableCompetitorsHeader = table[1];
+            String tableStatsContent = table[2];
+            String tableCompetitorsContent = table[3];  
+            System.out.println("taalalala:\r\n" + Arrays.toString(table));
+
+            request.setAttribute("website", website); // This will be available as ${message}
+            request.setAttribute("date", apdata.getReportDate()); // This will be available as ${date}
+            request.setAttribute("isLive", apdata.getIsLive()); //
+            request.setAttribute("reportSize", apdata.getReportSize()); //
+            request.setAttribute("tableStatsHeader", tableStatsHeader); //
+            request.setAttribute("tableCompetitorsHeader", tableCompetitorsHeader); //
+            request.setAttribute("tableStatsContent", tableStatsContent); //
+            request.setAttribute("tableCompetitorsContent", tableCompetitorsContent); //
+            request.getRequestDispatcher("/reportBasicAPI.jsp").forward(request, response);
+        }
+    }
+        
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
