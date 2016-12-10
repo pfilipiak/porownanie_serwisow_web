@@ -36,7 +36,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String date = getValueQS("date",request.getQueryString());
         
-            APIDataConnector apdata = new APIDataConnector(website, date, "2fc1906300ddc89289961a1c3642a273");
+            APIDataConnector apdata = new APIDataConnector(website, date, "---api-key----", true);
             
             out.println("<!DOCTYPE html>");
             out.println("<html lang=\"pl\">");
@@ -69,7 +69,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String date = getValueQS("date",request.getQueryString());
             
-            APIDataConnector apdata = new APIDataConnector(website, date, "2fc1906300ddc89289961a1c3642a273");
+            APIDataConnector apdata = new APIDataConnector(website, date, "---api-key---", true);
             String[] table = apdata.GChartKeywordTableReport(website, date, 1000);
             String tableHeader = table[0];
             String tableContent = table[1];    
@@ -97,7 +97,7 @@ public class AppServlet extends HttpServlet {
             
             String website = getValueQS("website",request.getQueryString());
 
-            APIDataConnector apdata = new APIDataConnector(website, "live", "2fc1906300ddc89289961a1c3642a273");
+            APIDataConnector apdata = new APIDataConnector(website, "live", "2fc1906300ddc89289961a1c3642a273", false);
             String[] table = apdata.GChartBasicWebsiteStat(website, 2);
             String tableStatsHeader = table[0];
             String tableCompetitorsHeader = table[1];

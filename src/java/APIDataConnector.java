@@ -25,17 +25,18 @@ public class APIDataConnector {
     private String reportContent;
     private Integer reportSize;
     private String apiKey = "";
+    private Boolean testMode = true;
  
 
-    public APIDataConnector(String website, String date, String apiKey) {
+    public APIDataConnector(String website, String date, String apiKey, Boolean testMode) {
 
+        this.testMode = testMode;
         SemrushAPIConnector sem = new SemrushAPIConnector(apiKey);  
-        sem.testMode = true;
+        sem.testMode = testMode;
         Long credits = sem.TestAPIKey();
         if (credits >= 0L) this.apiKey = apiKey;
         
         System.out.println("credits:" + credits);
-        Boolean testMode = false;
          // private Boolean testMode = true; w SemRushAPIConnector + urle do danych temp
          
         if (testMode == true){ 
@@ -85,11 +86,10 @@ public class APIDataConnector {
         Integer volHigh = 0;
         
         SemrushAPIConnector sem = new SemrushAPIConnector(this.apiKey);  
-        sem.testMode = true;
-        Boolean testMode = true;
+        sem.testMode = this.testMode;
          // private Boolean testMode = true; w SemRushAPIConnector + urle do danych temp
          
-        if (testMode){
+        if (this.testMode){
             APIData onlyTest = new APIData();           
             sem.getWebsitePhrasesReport(onlyTest, website, "pl", date, rows); //top 5 fraz
             Map<String[], APIWebsitePhrases> map = onlyTest.getResultsWebsitePhrases();
@@ -155,10 +155,10 @@ public class APIDataConnector {
         table[3] = ""; //dane do table 1
               
         SemrushAPIConnector sem = new SemrushAPIConnector(this.apiKey);  
-        sem.testMode = false;
-        Boolean testMode = false;
+        sem.testMode = this.testMode;
+
          // private Boolean testMode = true; w SemRushAPIConnector + urle do danych temp
-         if (testMode == false) {
+         if (this.testMode == false) {
             APIData apiDirect = new APIData(); 
             sem.getWebsiteStatsReport(apiDirect, website, "pl", true); //top 5 fraz
             Map<String[], APIWebsiteStats> websiteStat = apiDirect.getResultsWebsiteStats();
