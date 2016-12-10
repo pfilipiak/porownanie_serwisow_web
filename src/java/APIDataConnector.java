@@ -31,8 +31,10 @@ public class APIDataConnector {
     public APIDataConnector(String website, String date, String apiKey, Boolean testMode) {
 
         this.testMode = testMode;
+        
         SemrushAPIConnector sem = new SemrushAPIConnector(apiKey);  
         sem.testMode = testMode;
+        
         Long credits = sem.TestAPIKey();
         if (credits >= 0L) this.apiKey = apiKey;
         
@@ -46,8 +48,8 @@ public class APIDataConnector {
             //System.out.println(tempContent);
             
             try {
-              byte[] byteText = tempContent.getBytes(Charset.forName("ISO-8859-2"));
-              tempContent = new String(byteText , "UTF-8");
+              byte[] byteText = tempContent.getBytes(Charset.forName("UTF-8"));
+              tempContent = new String(byteText , "ISO-8859-8");
             } catch (UnsupportedEncodingException e){
             System.err.println("Błąd kodowania: " + e);
             }
@@ -139,7 +141,7 @@ public class APIDataConnector {
     }
     
       public String[] GChartBasicWebsiteStat(String website, Integer competitors){
-        String table[] = new String[4];
+        String table[] = new String[6];
         table[0] = "data.addColumn('string', 'Domain');\r\n" +
                    "data.addColumn('string', 'Data');\r\n" + 
                    "data.addColumn('number', 'Keywords');\r\n" +
@@ -154,6 +156,14 @@ public class APIDataConnector {
         table[2] = ""; //dane do table 0
         table[3] = ""; //dane do table 1
               
+        table[4] = "data.addColumn('string', 'Keyword');\r\n" +
+                   "data.addColumn('string', 'URL');\r\n" + 
+                   "data.addColumn('number', 'Pos');\r\n" +
+                   "data.addColumn('number', 'Vol');\r\n" +
+                   "data.addColumn('number', 'Tr. Share (%)');\r\n";
+        table[5] = ""; //dane do table 1
+                
+                
         SemrushAPIConnector sem = new SemrushAPIConnector(this.apiKey);  
         sem.testMode = this.testMode;
 
@@ -166,6 +176,9 @@ public class APIDataConnector {
             sem.getWebsiteCompetitorsReport(apiDirect, website, "pl", competitors); //top 5 fraz
             Map<String[], APIWebsiteCompetitors> websiteComp = apiDirect.getResultsWebsiteCompetitors();
             //System.out.println("cc:" + apiDirect.printAPIWebsiteCompetitors()); 
+            
+            sem.getWebsitePhrasesReport(apiDirect, website, "pl", "live", 10); //top 5 fraz
+            Map<String[], APIWebsitePhrases> websiteKWs = apiDirect.getResultsWebsitePhrases();
             
                 if (websiteStat != null) {
                     for (String[] key : websiteStat.keySet()) {
@@ -185,6 +198,27 @@ public class APIDataConnector {
                                       "{v:" + websiteComp.get(key).getTraffic() + "}],\r\n";
                       }
                   }
+                
+
+
+                if (websiteKWs != null) {
+                    for (String[] key : websiteKWs.keySet()) {
+                        //map.get(key)....
+                        table[5] += "['" + websiteKWs.get(key).getPhrase() + "', " + 
+                                    "'" + websiteKWs.get(key).getUrl() + "', " + 
+                                    "{v:" + websiteKWs.get(key).getPosition() + "}, " + 
+                                    "{v:" + websiteKWs.get(key).getVolumen()+ "}, " + 
+                                    "{v:" + websiteKWs.get(key).getTrafficShare() + "}],\r\n";
+
+                    }
+                }
+                
+                table[2] = table[2].trim();
+                table[2] = table[2].substring(0, table[2].length()-1);
+                table[3] = table[3].trim();
+                table[3] = table[3].substring(0, table[3].length()-1);
+                table[5] = table[5].trim();
+                table[5] = table[5].substring(0, table[5].length()-1);                
 
          }
 

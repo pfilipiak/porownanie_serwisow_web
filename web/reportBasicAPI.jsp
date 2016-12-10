@@ -29,9 +29,12 @@
                   google.charts.load('current', {'packages':['corechart', 'table']});
 
                   // Set a callback to run when the Google Visualization API is loaded.
-                  google.charts.setOnLoadCallback(drawChartPos);
-                  google.charts.setOnLoadCallback(drawChartVol);
-                  google.charts.setOnLoadCallback(drawTable);
+                  //google.charts.setOnLoadCallback(drawChartPos);
+                  //google.charts.setOnLoadCallback(drawChartVol);
+                  google.charts.setOnLoadCallback(drawTableBasicStats);
+                  google.charts.setOnLoadCallback(drawTableCompetitors);
+                  google.charts.setOnLoadCallback(drawTableKWs);
+                  
                   // Callback that creates and populates a data table,
                   // instantiates the pie chart, passes in the data and
                   // draws it.
@@ -78,11 +81,8 @@
                      data.addRows([ ${tableStatsContent} ]);
 
                     var options = {'title':'Statysyki serwisu',
-                                   'page': 'enable',
-                                   'pageSize': 10,
+                                   'page': 'disable',
                                    'showRowNumber': 'true',
-                                   'sortColumn': 1,
-                                   'sortAscending': false,
                                    'width': '100%',
                                    'height': '50%'};
                     //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
@@ -97,10 +97,10 @@
                      data.addRows([ ${tableCompetitorsContent} ]);
 
                     var options = {'title':'Raport konkurencji',
-                                   'page': 'enable',
+                                   'page': 'disable',
                                    'pageSize': 10,
                                    'showRowNumber': 'true',
-                                   'sortColumn': 2,
+                                   'sortColumn': 1,
                                    'sortAscending': false,
                                    'width': '100%',
                                    'height': '50%'};
@@ -110,31 +110,26 @@
                   }
                   
                   //
-      function drawTableCompetitors2() {
- var data = new google.visualization.DataTable();
- //kolumny
- data.addColumn('string', 'Competitor');
-					data.addColumn('number', 'Relevance');
-					data.addColumn('number', 'Common Keywords');
-					data.addColumn('number', 'Keywords');
-					data.addColumn('number', 'Traffic');
+                   function drawTableKWs() {
+                    var data = new google.visualization.DataTable();
+                    //kolumny
+                    ${tableKWsHeader}
+                     data.addRows([ ${tableKWsContent} ]);
 
-                                        data.addRows([ ['ceneo.pl', {v:5.24}, {v:3325}, {v:120714}, {v:2050277}],
-					['euro.com.pl', {v:24.01}, {v:3493}, {v:19859}, {v:1935553}],
-					 ]);
-
-                                        var options = {'title':'Raport konkurencji',
-                                                       'page': 'enable',
-                                                       'pageSize': 10,
-                                                       'showRowNumber': 'true',
-                                                       'sortColumn': 2,
-                                                       'sortAscending': false,
-                                                       'width': '100%',
-                                                       'height': '50%'};
-                                        //
-                                        var table = new google.visualization.Table(document.getElementById('table_div_competitors2'));
-                                        table.draw(data, options);
-}            
+                    var options = {'title':'Raport konkurencji',
+                                   'page': 'disable',
+                                   'pageSize': 10,
+                                   'showRowNumber': 'true',
+                                   'sortColumn': 1,
+                                   'sortAscending': false,
+                                   'width': '100%',
+                                   'height': '50%'};
+                    //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
+                    var table = new google.visualization.Table(document.getElementById('table_div_KWs'));
+                    table.draw(data, options);
+                  }
+                  
+                  //
                 </script>
                 
 	</head>
@@ -214,28 +209,28 @@
 					<div id="content" class="10u skel-cell-important">
 						<section>
 							<header>
-								<h2>Przykładowa analiza serwisu</h2>
-								<span class="byline">demo</span>
+                                                            <h2>Statystyki <b>${website}</b></h2>
 							</header>
-							
                                                     
                                                     <!-- skrypt reportStat -->
                                                         <!--Div that will hold the pie chart-->
-                                                        <p>Serwis: ${website}<br>
-                                                           Data: <b>${date}</b>, czy dane live: <b>${isLive}</b><br>
-                                                           Liczba encji ${reportSize}
-                                                        </p>
+ 
+                                                        <!--
                                                         <table>
                                                             <tr>
                                                                 <td> <div id="chart_pos_div"></div></td>
                                                                 <td> <div id="chart_vol_div"></div></td>
                                                             </tr>
                                                         </table>
-                                                        Tabele
+                                                        -->
+                                                        Statystyki serwisu
                                                         <div id="table_div_stats"></div>
+                                                        <br><br>
+                                                        Konkurencja serwisu
                                                         <div id="table_div_competitors"></div>
-                                                        tab 2
-                                                        <div id="table_div_competitors2"></div>
+                                                                        <br><br>
+                                                        Top 10 fraz
+                                                        <div id="table_div_KWs"></div>
                                                     
                                                     
 						</section>

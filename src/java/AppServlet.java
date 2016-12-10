@@ -97,22 +97,22 @@ public class AppServlet extends HttpServlet {
             
             String website = getValueQS("website",request.getQueryString());
 
-            APIDataConnector apdata = new APIDataConnector(website, "live", "2fc1906300ddc89289961a1c3642a273", false);
-            String[] table = apdata.GChartBasicWebsiteStat(website, 2);
+            APIDataConnector apdata = new APIDataConnector(website, "live", "--podaj-klucz-i-ustaw-na-true-", true);
+            String[] table = apdata.GChartBasicWebsiteStat(website, 5);
             String tableStatsHeader = table[0];
             String tableCompetitorsHeader = table[1];
             String tableStatsContent = table[2];
-            String tableCompetitorsContent = table[3];  
-            System.out.println("taalalala:\r\n" + Arrays.toString(table));
+            String tableCompetitorsContent = table[3]; 
+            String tableKWsHeader = table[4];
+            String tableKWsContent = table[5];
 
             request.setAttribute("website", website); // This will be available as ${message}
-            request.setAttribute("date", apdata.getReportDate()); // This will be available as ${date}
-            request.setAttribute("isLive", apdata.getIsLive()); //
-            request.setAttribute("reportSize", apdata.getReportSize()); //
             request.setAttribute("tableStatsHeader", tableStatsHeader); //
             request.setAttribute("tableCompetitorsHeader", tableCompetitorsHeader); //
             request.setAttribute("tableStatsContent", tableStatsContent); //
             request.setAttribute("tableCompetitorsContent", tableCompetitorsContent); //
+            request.setAttribute("tableKWsHeader", tableKWsHeader); //
+            request.setAttribute("tableKWsContent", tableKWsContent); //
             request.getRequestDispatcher("/reportBasicAPI.jsp").forward(request, response);
         }
     }
@@ -130,10 +130,13 @@ public class AppServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String qs = request.getQueryString();
         if (qs.contains("r=1")) {
-        processRequestToReport1(request, response);
-        } else {
+            processRequestToReport1(request, response);
+        } else if (qs.contains("r=basic")) {
+            processRequestToBasicStats(request, response);
+        }  else {
             processServletRequest(request, response);
         }
     }
