@@ -177,7 +177,7 @@ public class APIDataConnector {
             Map<String[], APIWebsiteCompetitors> websiteComp = apiDirect.getResultsWebsiteCompetitors();
             //System.out.println("cc:" + apiDirect.printAPIWebsiteCompetitors()); 
             
-            sem.getWebsitePhrasesReport(apiDirect, website, "pl", "live", 10); //top 5 fraz
+            sem.getWebsitePhrasesReport(apiDirect, website, "pl", "live", 5); //top 5 fraz
             Map<String[], APIWebsitePhrases> websiteKWs = apiDirect.getResultsWebsitePhrases();
             
                 if (websiteStat != null) {

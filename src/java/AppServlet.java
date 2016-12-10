@@ -98,7 +98,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
 
             APIDataConnector apdata = new APIDataConnector(website, "live", "--podaj-klucz-i-ustaw-na-true-", true);
-            String[] table = apdata.GChartBasicWebsiteStat(website, 5);
+            String[] table = apdata.GChartBasicWebsiteStat(website, 3);
             String tableStatsHeader = table[0];
             String tableCompetitorsHeader = table[1];
             String tableStatsContent = table[2];
