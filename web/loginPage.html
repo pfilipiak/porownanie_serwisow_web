@@ -1,8 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-	Linear by TEMPLATED
-    templated.co @templatedco
-    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+    @author ppolanowski
 -->
 <html>
 	<head>
@@ -11,42 +9,17 @@
 		<meta name="description" content="najlepsze narzędzie dla specjalistów SEO na rynku" />
 		<meta name="keywords" content="" />
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-panels.min.js"></script>
 		<script src="js/init.js"></script>
+                <script src="js/logowanie.js"></script>
 		<noscript>
 			<link rel="stylesheet" href="css/skel-noscript.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
                 
-                <!-- logowanie -->
-                <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript"> 
-                    var users = new Array("user1", "user2", "user3");
-                    var passwords = new Array("kod1", "kod2", "kod3");
-                    function sprawdz_haslo(username, password)
-                    {  
-                      for(var i = 0; i < users.length; i++){
-                        if((username == users[i]) && (password == passwords[i]))
-                          return true;
-                      }
-                      return false;
-                    }
-                    function check()
-                    {
-                      var username = document.logowanie.username.value;
-                      var password = document.logowanie.password.value;
-                      if(!sprawdz_haslo(username, password)){
-                          alert('Niepoprawne hasło!');
-                      }
-                      else{
- 
-                        document.location.href = "logged.html"; 
-                      }
-                    }
-                    
-                    </script>
 	</head>
 	<body>
 
@@ -56,11 +29,12 @@
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li><a href="index.html">Strona główna</a></li>
+						<li class="active"><a href="index.html">Strona główna</a></li>
                                                 <li><a href="./Reports?r=1&website=redcoon.pl&date=201610">Analiza serwisu</a></li>
                                                 <li><a href="left-sidebar.html">Subskrypcja</a></li>    
                                                 <li><a href="left-sidebar.html">Trendy</a></li>
-                                                <li class="active"><a href="loginPage.html">Logowanie</a></li>
+                                                <li><a href="contact.html">Kontakt</a></li>
+                                                <li><a href="loginPage.html">Logowanie</a></li>
                                                 <li>
                                                     <form action="Reports?r=1" method="get">
                                                         <input type="text" name="website" placeholder="Analizuj domenę...">
@@ -86,40 +60,29 @@
 				<section>
 					<header>
 						<h2>Logowanie</h2>
-						<!--
-                                                    <div class="container">
-
-                                                    <form class="form-signin">
-                                                      <h2 class="form-signin-heading">Please sign in</h2>
-                                                      <label for="inputEmail" class="sr-only">Email address</label>
-                                                      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                                                      <label for="inputPassword" class="sr-only">Password</label>
-                                                      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                                                      <div class="checkbox">
-                                                        <label>
-                                                          <input type="checkbox" value="remember-me"> Remember me
-                                                        </label>
-                                                      </div>
-                                                      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                                                    </form>
-
-                                                  </div> <!-- /container -->
-                                                
-                                                
-                                                <!-- formularz logowania -->
-                                                
                                                 <div id="log_panel">
                                                     <form name="logowanie">
-                                                        <label for="log_username">Nazwa użytkownika:</label>
-                                                        <input type="text" id="log_username" name="username">
+                                                        <label for ="log_username">Nazwa użytkownika:</label>
+                                                        <input type="text" id="log_username" name="username" required autofocus>
                                                         <label for="log_password">Hasło:</label>
-                                                        <input type="password" id="log_password" name="password">
+                                                        <input type="password" id="log_password" name="password" required>
                                                         <div id="log_lower">
                                                             <input type="checkbox"><label class="log_check" for="checkbox">Zapamiętaj mnie!</label>
                                                             <input class="button" type="button" value="Zaloguj" onClick="check();">
                                                             <a href="#">Nie masz konta? Zarejestruj się...</a>
                                                         </div>
                                                     </form>
+                                                    <!--
+                                                    <script type="text/javascript">
+            alert("Ustawianie cookies...");
+            
+            alert("Cookie 'user1' ma wartość " + getCookie("user1"));
+            
+            
+            alert("Cookie 'username' ma wartość " + document.cookie);
+            
+        </script>
+                                                    -->
                                                 </div>
 				</section>
 			</div>

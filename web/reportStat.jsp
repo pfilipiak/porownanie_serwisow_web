@@ -1,9 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
-	Linear by TEMPLATED
-    templated.co @templatedco
-    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+    @author ppolanowski
 -->
 <html>
 	<head>
@@ -100,10 +98,11 @@
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li><a href="index.html">Strona główna</a></li>
-                                                <li class='active'><a href="./Reports?r=1&website=redcoon.pl&date=201610"">Analiza serwisu</a></li>
-                                                <li><a href="#">Subskrypcja</a></li>    
-                                                <li><a href="#">Trendy</a></li>
+						<li class="active"><a href="index.html">Strona główna</a></li>
+                                                <li><a href="./Reports?r=1&website=redcoon.pl&date=201610">Analiza serwisu</a></li>
+                                                <li><a href="left-sidebar.html">Subskrypcja</a></li>    
+                                                <li><a href="left-sidebar.html">Trendy</a></li>
+                                                <li><a href="contact.html">Kontakt</a></li>
                                                 <li><a href="loginPage.html">Logowanie</a></li>
                                                 <li>
                                                     <form action="Reports?r=1" method="get">
@@ -133,32 +132,32 @@
 					<div id="sidebar" class="2u">
 						<section>
 							<header>
-								<h2>Etiam malesuada</h2>
+								<h2>Ustawienia</h2>
 							</header>
 							<div class="row">
 								<section class="10u">
 									<ul class="default">
-										<li><a href="#">Donec facilisis tempor</a></li>
-										<li><a href="#">Nulla convallis cursus</a></li>
-										<li><a href="#">Integer congue euismod</a></li>
-										<li><a href="#">Venenatis vulputate</a></li>
-										<li><a href="#">Morbi ligula volutpat</a></li>
+										<li><a href="#">Konto użytkownika</a></li>
+										<li><a href="#">Klucz dostępu</a></li>
+										<li><a href="#">Analizowane domeny</a></li>
+										<li><a href="#">Analiza konkurencji</a></li>
+										<li><a href="#">Ustaw monitoring i alerty</a></li>
 									</ul>
 								</section>
 															</div>
 						</section>
 						<section>
 							<header>
-								<h2>Mauris vulputate</h2>
+								<h2>Dane z monitoringu</h2>
 							</header>
 							<ul class="style">
 								<li>
-									<p class="posted">May 21, 2014  |  (10 )  Comments</p>
-									<p><a href="#">Nullam non wisi a sem eleifend. Donec mattis libero eget urna. Pellentesque viverra enim.</a></p>
+									<p class="posted">Grudzień 12, 2016  |  Allegro.pl</p>
+									<p><a href="#">Serwis Allegro.pl odnotował znaczny wzrost ruchu organicznego. Kliknij, aby przejść do raportu.</a></p>
 								</li>
 								<li>
-									<p class="posted">May 18, 2014  |  (10 )  Comments</p>
-									<p><a href="#">Nullam non wisi a sem eleifend. Donec mattis libero eget urna. Pellentesque viverra enim.</a></p>
+									<p class="posted">Grudzień 9, 2016  |  MediaExpert.pl</p>
+									<p><a href="#">Serwis MediaExpert.pl odnotował znaczny wzrost ruchu organicznego. Kliknij, aby przejść do raportu.</a></p>
 								</li>
 							</ul>
 						</section>
