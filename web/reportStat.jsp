@@ -102,43 +102,10 @@
 			<div class="container">
 				<div class="row">
 
-					<!-- Sidebar -->
-					<div id="sidebar" class="2u">
-						<section>
-							<header>
-								<h2>Ustawienia</h2>
-							</header>
-							<div class="row">
-								<section class="10u">
-									<ul class="default">
-										<li><a href="#">Konto użytkownika</a></li>
-										<li><a href="#">Klucz dostępu</a></li>
-										<li><a href="#">Analizowane domeny</a></li>
-										<li><a href="#">Analiza konkurencji</a></li>
-										<li><a href="#">Ustaw monitoring i alerty</a></li>
-									</ul>
-								</section>
-															</div>
-						</section>
-						<section>
-							<header>
-								<h2>Dane z monitoringu</h2>
-							</header>
-							<ul class="style">
-								<li>
-									<p class="posted">Grudzień 12, 2016  |  Allegro.pl</p>
-									<p><a href="#">Serwis Allegro.pl odnotował znaczny wzrost ruchu organicznego. Kliknij, aby przejść do raportu.</a></p>
-								</li>
-								<li>
-									<p class="posted">Grudzień 9, 2016  |  MediaExpert.pl</p>
-									<p><a href="#">Serwis MediaExpert.pl odnotował znaczny wzrost ruchu organicznego. Kliknij, aby przejść do raportu.</a></p>
-								</li>
-							</ul>
-						</section>
-					</div>
-					
+                                    <!-- Sidebar -->
+					<%@include file="sidebar.jsp" %>					
 					<!-- Content -->
-					<div id="content" class="10u skel-cell-important">
+                                        <%@include file="nav_pod.jsp" %>		
 						<section>
 							<header>
 								<h2>Przykładowa analiza serwisu</h2>
@@ -161,7 +128,7 @@
                                                         Lista 1000 fraz:
                                                         <div id="table_div"></div>
 
-                                                    
+                                                        <p><a href="#">Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
                                                     
 						</section>
 					</div>

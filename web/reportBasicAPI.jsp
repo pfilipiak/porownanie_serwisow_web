@@ -144,52 +144,12 @@
 				<div class="row">
 
 					<!-- Sidebar -->
-					<div id="sidebar" class="2u">
-						<section>
-							<header>
-								<h2>Ustawienia</h2>
-							</header>
-							<div class="row">
-								<section class="10u">
-									<ul class="default">
-										<li><a href="#">Konto użytkownika</a></li>
-										<li><a href="#">Klucz dostępu</a></li>
-										<li><a href="#">Analizowane domeny</a></li>
-										<li><a href="#">Analiza konkurencji</a></li>
-										<li><a href="#">Ustaw monitoring i alerty</a></li>
-									</ul>
-								</section>
-															</div>
-						</section>
-						<section>
-							<header>
-								<h2>Dane z monitoringu</h2>
-							</header>
-							<ul class="style">
-								<li>
-									<p class="posted">Grudzień 12, 2016  |  Allegro.pl</p>
-									<p><a href="#">Serwis Allegro.pl odnotował znaczny wzrost ruchu organicznego. Kliknij, aby przejść do raportu.</a></p>
-								</li>
-								<li>
-									<p class="posted">Grudzień 9, 2016  |  MediaExpert.pl</p>
-									<p><a href="#">Serwis MediaExpert.pl odnotował znaczny wzrost ruchu organicznego. Kliknij, aby przejść do raportu.</a></p>
-								</li>
-							</ul>
-						</section>
-					</div>
-					
+					<%@include file="sidebar.jsp" %>					
 					<!-- Content -->
-					<div id="content" class="10u skel-cell-important">
-                                            <nav id="nav_pod">
-                                            <ul>
-						<li><a href="index.html">Strona główna</a></li>
-                                                <li class='active'><a href="./Reports?r=1&website=redcoon.pl&date=201610">Analiza serwisu</a></li>
-                                                <li><a href="#">Subskrypcja</a></li>    
-                                                <li><a href="#">Trendy</a></li>
-                                                <li><a href="loginPage.html">Logowanie</a></li>
-                                            </ul>
-                                            </nav>
+                                        <%@include file="nav_pod.jsp" %>					
+
 						<section>
+                                                    <br>
 							<header>
                                                             <h2>Statystyki <b>${website}</b></h2>
 							</header>
@@ -205,6 +165,7 @@
                                                             </tr>
                                                         </table>
                                                         -->
+                                                        
                                                         Statystyki serwisu
                                                         <div id="table_div_stats"></div>
                                                         <br><br>
@@ -213,7 +174,8 @@
                                                                         <br><br>
                                                         Top 10 fraz
                                                         <div id="table_div_KWs"></div>
-                                                    
+                                                        
+                                                        <p><a href="#">Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
                                                     
 						</section>
 					</div>

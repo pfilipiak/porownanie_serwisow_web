@@ -56,6 +56,7 @@
 		</div>
 	<!-- /Main -->
 
+
             <%@include file="footer.jsp" %>
 	</body>
 </html>
