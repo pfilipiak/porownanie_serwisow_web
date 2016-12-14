@@ -1,8 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<!--
-    @author ppolanowski
--->
+<%-- 
+    Document   : reportStat
+    Created on : 2016-12-14, 19:33:13
+    Author     : Piotr
+--%>
 <html>
 	<head>
 		<title>Porównywarka serwisów</title>
@@ -93,35 +95,7 @@
 	<body>
 
 	<!-- Header -->
-		<div id="header">
-			<div id="nav-wrapper"> 
-				<!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li class="active"><a href="index.html">Strona główna</a></li>
-                                                <li><a href="./Reports?r=1&website=redcoon.pl&date=201610">Analiza serwisu</a></li>
-                                                <li><a href="left-sidebar.html">Subskrypcja</a></li>    
-                                                <li><a href="left-sidebar.html">Trendy</a></li>
-                                                <li><a href="contact.html">Kontakt</a></li>
-                                                <li><a href="loginPage.html">Logowanie</a></li>
-                                                <li>
-                                                    <form action="Reports?r=1" method="get">
-                                                        <input type="text" name="website" placeholder="Analizuj domenę...">
-                                                    </form>
-                                                </li>
-					</ul>
-				</nav>
-			</div>
-			<div class="container"> 
-				
-				<!-- Logo -->
-				<div id="logo">
-					<h1><a href="index.html">Porównywarka serwisów</a></h1>
-					<span class="tag">JEDYNE TAKIE NARZĘDZIE SEO NA RYNKU</span>
-				</div>
-			</div>
-		</div>
-	<!-- Header --> 
+        <%@include file="header.jsp" %>        
 
 	<!-- Main -->
 		<div id="main">
@@ -197,42 +171,7 @@
 		</div>
 	<!-- /Main -->
 
-	<!-- Tweet -->
-		<div id="tweet">
-			<div class="container">
-				<section>
-					<blockquote>&ldquo;Bo być w Internecie, to być albo nie być.&rdquo;</blockquote>
-				</section>
-			</div>
-		</div>
-	<!-- /Tweet -->
-
-	<!-- Footer -->
-		<div id="footer">
-			<div class="container">
-				<section>
-					<header>
-						<h2>Bądźmy w kontakcie</h2>
-						<span class="byline">Jeśli masz pytania, skontaktuj się z nami lub odwiedź nas na portalach społecznościowych.</span>
-					</header>
-					<ul class="contact">
-						<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
-						<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
-						<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
-						<li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
-					</ul>
-				</section>
-			</div>
-		</div>
-	<!-- /Footer -->
-
-	<!-- Copyright -->
-		<div id="copyright">
-			<div class="container">
-				Design: <a href="#">AO&PF&PP</a>
-			</div>
-		</div>
-
+        <%@include file="footer.jsp" %>
 
 	</body>
 </html>

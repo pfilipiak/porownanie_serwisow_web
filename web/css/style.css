@@ -1,7 +1,5 @@
 /*
-	Linear by TEMPLATED
-    templated.co @templatedco
-    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+    Author  : Piotr
 */
 
 @charset 'UTF-8';
@@ -58,6 +56,11 @@
             text-shadow:0 0 6px black;
             font-weight: bold;
         }        
+        
+        .contact_panel
+        {
+            margin-left: 30%;
+        }
                         
 	strong, b
 	{
@@ -900,6 +903,67 @@
 			{
 				display: none;
 			}
+/*********************************************************************************/
+/* nav_pod                                                                          */
+/*********************************************************************************/
+                        
+
+    #nav_pod
+	{
+	}
+
+		#nav_pod-wrapper
+		{
+			background: rgba(0,0,0,.1);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+		
+		#nav_pod > ul
+		{
+			margin: 0;
+			padding: 0;
+			text-align: center;
+		}
+
+		#nav_pod > ul > li
+		{
+			display: inline-block;
+			border-right: 1px solid;
+			border-color: rgba(255,255,255,.1);
+		}
+		
+			#nav_pod > ul > li:last-child
+			{
+				padding-right: 0;
+				border-right: none;
+			}
+
+			#nav_pod > ul > li > a,
+			#nav_pod > ul > li > span
+			{
+				display: inline-block;
+				padding: 1.5em 1.5em;
+				letter-spacing: 0.06em;
+				text-decoration: none;
+				text-transform: uppercase;
+				font-size: 1.1em;
+				outline: 0;
+				color: darkgreen;
+			}
+
+			#nav_pod li.active a
+			{
+				color: darkgreen;
+			}
+                        
+                        
+			#nav_pod > ul > li > ul
+			{
+				display: none;
+			}                     
 	
 /*********************************************************************************/
 /* Main                                                                          */
@@ -944,6 +1008,19 @@
 	#footer header .byline
 	{
 		color: rgba(255,255,255,.2);
+	}
+        
+        #footer .contact
+	{
+		color: rgba(255,255,255,.2);
+                text-decoration: none;    
+	}
+        
+        #footer .contact:hover
+	{
+		color: darkgreen;
+                text-decoration: none;    
+                
 	}
         
         .find_form

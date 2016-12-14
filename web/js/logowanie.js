@@ -6,14 +6,14 @@
 
     var users = new Array("user1", "user2", "user3");
     var passwords = new Array("kod1", "kod2", "kod3");
-    var name = new Array("Piotr Polanowski", "Paweł Filipiak", "Adrian Olszewski");
-    var str_name = "";
+    var name = new Array("Piotr", "Paweł", "Adrian");
+    var str_name = new String();
     
     function sprawdz_haslo(username, password)
     {  
       for(var i = 0; i < users.length; i++){
-        if((username == users[i]) && (password == passwords[i]))
-          str_name = name[i];
+        if((username === users[i]) && (password === passwords[i]))
+            str_name = name[i];
             return true;
       }
       str_name = "";

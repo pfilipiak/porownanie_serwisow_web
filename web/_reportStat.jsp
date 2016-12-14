@@ -1,10 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<%-- 
-    Document   : reportBasicAPI
-    Created on : 2016-12-14, 19:33:13
-    Author     : Piotr
---%>
+<!--
+    @author ppolanowski
+-->
 <html>
 	<head>
 		<title>Porównywarka serwisów</title>
@@ -29,12 +27,9 @@
                   google.charts.load('current', {'packages':['corechart', 'table']});
 
                   // Set a callback to run when the Google Visualization API is loaded.
-                  //google.charts.setOnLoadCallback(drawChartPos);
-                  //google.charts.setOnLoadCallback(drawChartVol);
-                  google.charts.setOnLoadCallback(drawTableBasicStats);
-                  google.charts.setOnLoadCallback(drawTableCompetitors);
-                  google.charts.setOnLoadCallback(drawTableKWs);
-                  
+                  google.charts.setOnLoadCallback(drawChartPos);
+                  google.charts.setOnLoadCallback(drawChartVol);
+                  google.charts.setOnLoadCallback(drawTable);
                   // Callback that creates and populates a data table,
                   // instantiates the pie chart, passes in the data and
                   // draws it.
@@ -74,69 +69,58 @@
                     chart.draw(data, options);
                   }
                   //
-                  function drawTableBasicStats() {
+                  function drawTable() {
                     var data = new google.visualization.DataTable();
                     //kolumny
-                    ${tableStatsHeader}
-                     data.addRows([ ${tableStatsContent} ]);
+                    ${tableHeader}
+                     data.addRows([ ${tableContent} ]);
 
-                    var options = {'title':'Statysyki serwisu',
-                                   'page': 'disable',
-                                   'showRowNumber': 'true',
-                                   'width': '100%',
-                                   'height': '50%'};
-                    //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
-                    var table = new google.visualization.Table(document.getElementById('table_div_stats'));
-                    table.draw(data, options);
-                  }
-                  
-                   function drawTableCompetitors() {
-                    var data = new google.visualization.DataTable();
-                    //kolumny
-                    ${tableCompetitorsHeader}
-                     data.addRows([ ${tableCompetitorsContent} ]);
-
-                    var options = {'title':'Raport konkurencji',
-                                   'page': 'disable',
+                    var options = {'title':'Raport pozycji',
+                                   'page': 'enable',
                                    'pageSize': 10,
                                    'showRowNumber': 'true',
-                                   'sortColumn': 1,
+                                   'sortColumn': 4,
                                    'sortAscending': false,
                                    'width': '100%',
                                    'height': '50%'};
                     //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
-                    var table = new google.visualization.Table(document.getElementById('table_div_competitors'));
+                    var table = new google.visualization.Table(document.getElementById('table_div'));
                     table.draw(data, options);
                   }
-                  
-                  //
-                   function drawTableKWs() {
-                    var data = new google.visualization.DataTable();
-                    //kolumny
-                    ${tableKWsHeader}
-                     data.addRows([ ${tableKWsContent} ]);
-
-                    var options = {'title':'Raport konkurencji',
-                                   'page': 'disable',
-                                   'pageSize': 10,
-                                   'showRowNumber': 'true',
-                                   'sortColumn': 1,
-                                   'sortAscending': false,
-                                   'width': '100%',
-                                   'height': '50%'};
-                    //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
-                    var table = new google.visualization.Table(document.getElementById('table_div_KWs'));
-                    table.draw(data, options);
-                  }
-                  
-                  //
                 </script>
                 
 	</head>
 	<body>
 
 	<!-- Header -->
-        <%@include file="header.jsp" %>           
+		<div id="header">
+			<div id="nav-wrapper"> 
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Strona główna</a></li>
+                                                <li class='active'><a href="./Reports?r=1&website=redcoon.pl&date=201610"">Analiza serwisu</a></li>
+                                                <li><a href="#">Subskrypcja</a></li>    
+                                                <li><a href="#">Trendy</a></li>
+                                                <li><a href="loginPage.html">Logowanie</a></li>
+                                                <li>
+                                                    <form action="Reports?r=1" method="get">
+                                                        <input type="text" name="website" placeholder="Analizuj domenę...">
+                                                    </form>
+                                                </li>
+					</ul>
+				</nav>
+			</div>
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="index.html">Porównywarka serwisów</a></h1>
+					<span class="tag">JEDYNE TAKIE NARZĘDZIE SEO NA RYNKU</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
         
 	<!-- Main -->
 		<div id="main">
@@ -180,39 +164,28 @@
 					
 					<!-- Content -->
 					<div id="content" class="10u skel-cell-important">
-                                            <nav id="nav_pod">
-                                            <ul>
-						<li><a href="index.html">Strona główna</a></li>
-                                                <li class='active'><a href="./Reports?r=1&website=redcoon.pl&date=201610">Analiza serwisu</a></li>
-                                                <li><a href="#">Subskrypcja</a></li>    
-                                                <li><a href="#">Trendy</a></li>
-                                                <li><a href="loginPage.html">Logowanie</a></li>
-                                            </ul>
-                                            </nav>
 						<section>
 							<header>
-                                                            <h2>Statystyki <b>${website}</b></h2>
+								<h2>Przykładowa analiza serwisu</h2>
+								<span class="byline">demo</span>
 							</header>
+							
                                                     
                                                     <!-- skrypt reportStat -->
                                                         <!--Div that will hold the pie chart-->
- 
-                                                        <!--
+                                                        <p>Serwis: ${website}<br>
+                                                           Data: <b>${date}</b>, czy dane live: <b>${isLive}</b><br>
+                                                           Liczba encji ${reportSize}
+                                                        </p>
                                                         <table>
                                                             <tr>
                                                                 <td> <div id="chart_pos_div"></div></td>
                                                                 <td> <div id="chart_vol_div"></div></td>
                                                             </tr>
                                                         </table>
-                                                        -->
-                                                        Statystyki serwisu
-                                                        <div id="table_div_stats"></div>
-                                                        <br><br>
-                                                        Konkurencja serwisu
-                                                        <div id="table_div_competitors"></div>
-                                                                        <br><br>
-                                                        Top 10 fraz
-                                                        <div id="table_div_KWs"></div>
+                                                        Lista 1000 fraz:
+                                                        <div id="table_div"></div>
+
                                                     
                                                     
 						</section>
@@ -223,7 +196,42 @@
 		</div>
 	<!-- /Main -->
 
-	<%@include file="footer.jsp" %>                
-        
+
+	<!-- Tweet -->
+		<div id="tweet">
+			<div class="container">
+				<section>
+					<blockquote>&ldquo;Bo być w Internecie, to być albo nie być.&rdquo;</blockquote>
+				</section>
+			</div>
+		</div>
+	<!-- /Tweet -->
+
+	<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<section>
+					<header>
+						<h2>Bądźmy w kontakcie</h2>
+						<span class="byline">Jeśli masz pytania, skontaktuj się z nami lub odwiedź nas na portalach społecznościowych.</span>
+					</header>
+					<ul class="contact">
+						<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+						<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+						<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+						<li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+	<!-- /Footer -->
+
+	<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				Design: <a href="#">AO&PF&PP</a>
+			</div>
+		</div>      
+
 	</body>
 </html>

@@ -1,10 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<%-- 
-    Document   : reportBasicAPI
-    Created on : 2016-12-14, 19:33:13
-    Author     : Piotr
---%>
+<!--
+    @author ppolanowski
+-->
 <html>
 	<head>
 		<title>Porównywarka serwisów</title>
@@ -136,7 +134,35 @@
 	<body>
 
 	<!-- Header -->
-        <%@include file="header.jsp" %>           
+		<div id="header">
+			<div id="nav-wrapper"> 
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Strona główna</a></li>
+                                                <li class='active'><a href="./Reports?r=1&website=redcoon.pl&date=201610"">Analiza serwisu</a></li>
+                                                <li><a href="#">Subskrypcja</a></li>    
+                                                <li><a href="#">Trendy</a></li>
+                                                <li><a href="loginPage.html">Logowanie</a></li>
+                                                <li>
+                                                    <form action="Reports?r=1" method="get">
+                                                        <input type="text" name="website" placeholder="Analizuj domenę...">
+                                                    </form>
+                                                </li>
+					</ul>
+				</nav>
+			</div>
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="index.html">Porównywarka serwisów</a></h1>
+					<span class="tag">JEDYNE TAKIE NARZĘDZIE SEO NA RYNKU</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
         
 	<!-- Main -->
 		<div id="main">
@@ -223,7 +249,40 @@
 		</div>
 	<!-- /Main -->
 
-	<%@include file="footer.jsp" %>                
-        
+	<!-- Tweet -->
+		<div id="tweet">
+			<div class="container">
+				<section>
+					<blockquote>&ldquo;Bo być w Internecie, to być albo nie być.&rdquo;</blockquote>
+				</section>
+			</div>
+		</div>
+	<!-- /Tweet -->
+
+	<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<section>
+					<header>
+						<h2>Bądźmy w kontakcie</h2>
+						<span class="byline">Jeśli masz pytania, skontaktuj się z nami lub odwiedź nas na portalach społecznościowych.</span>
+					</header>
+					<ul class="contact">
+						<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+						<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+						<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+						<li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+	<!-- /Footer -->
+
+	<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				Design: <a href="#">AO&PF&PP</a>
+			</div>
+		</div>      
 	</body>
 </html>
