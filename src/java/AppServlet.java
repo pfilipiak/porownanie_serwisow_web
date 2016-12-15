@@ -96,16 +96,18 @@ public class AppServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             String website = getValueQS("website",request.getQueryString());
-
-            APIDataConnector apdata = new APIDataConnector(website, "live", "--podaj-klucz-i-ustaw-na-true-", true);
-            String[] table = apdata.GChartBasicWebsiteStat(website, 3);
+            DataReports apdata = new DataReports("2fc1906300ddc89289961a1c3642a273", false);
+            //APIDataConnector apdata = new APIDataConnector(website, "live", "2fc1906300ddc89289961a1c3642a273", false);
+            String[] table = apdata.GChartBasicWebsiteStat(website, 5);
             String tableStatsHeader = table[0];
             String tableCompetitorsHeader = table[1];
             String tableStatsContent = table[2];
             String tableCompetitorsContent = table[3]; 
             String tableKWsHeader = table[4];
             String tableKWsContent = table[5];
-
+            
+           //System.out.println(Arrays.toString(table));
+            
             request.setAttribute("website", website); // This will be available as ${message}
             request.setAttribute("tableStatsHeader", tableStatsHeader); //
             request.setAttribute("tableCompetitorsHeader", tableCompetitorsHeader); //
