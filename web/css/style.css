@@ -964,8 +964,6 @@
 				display: none;
 			}                     
 	
-                        
-
                         #nav_pod li a, .dropbtn {
                             display: inline-block;
                             color: white;
@@ -1034,6 +1032,47 @@
 		display: block;
 		padding-bottom: 0.50em;
 	}
+        
+        #sidebar > ul
+		{
+			margin: 0;
+			padding: 0;
+                        display: block;
+			list-style-type: none;
+                        overflow: hidden;
+                        background-color: activeborder;
+		}
+                
+        #sidebar > ul > li > a,
+        #sidebar > ul > li > span
+        {
+                display: block;
+                padding: 1em 1em;
+                letter-spacing: 0.06em;
+                text-decoration: none;
+                outline: 0;
+                color: darkgreen;
+                background-color: activeborder;
+        }        
+
+        #sidebar a
+        {
+                color: darkgreen;
+        }
+        
+        #sidebar li a 
+        {
+            display: block;
+            padding: 5px 5px;
+            text-decoration: none;
+        }
+        
+        #sidebar a:hover
+        {
+                color: white;
+                background: darkgreen;
+                text-decoration: none;
+        }
 
 /*********************************************************************************/
 /* Footer                                                                        */

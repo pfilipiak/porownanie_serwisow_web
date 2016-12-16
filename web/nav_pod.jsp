@@ -12,7 +12,7 @@
         <li><a href="#">Ruch organiczny</a></li>    
         <li><a href="#">Linki zwrotne</a></li>
         <li><a href="#">Płatna reklama</a></li>    
-        <li><a href="#">Złożona analiza</a></li>     
+        <li><a href="#">Historyczne</a></li>     
     </ul>
     </nav>
     
