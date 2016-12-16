@@ -96,14 +96,15 @@ public class AppServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             String website = getValueQS("website",request.getQueryString());
-            DataReports apdata = new DataReports("------api---------", true); //true = fake API z local
+            DataReports apdata = new DataReports("---", true); //true = fake API z local
    
             String[] table = apdata.GChartBasicWebsiteStat(website, 5);
             String tableStatsHeader = table[0];
             String tableCompetitorsHeader = table[1];
-            String tableStatsContent = table[2];
-            String tableCompetitorsContent = table[3]; 
-            String tableKWsHeader = table[4];
+            String tableKWsHeader = table[2];
+                        
+            String tableStatsContent = table[3];
+            String tableCompetitorsContent = table[4]; 
             String tableKWsContent = table[5];
             
            //System.out.println(Arrays.toString(table));

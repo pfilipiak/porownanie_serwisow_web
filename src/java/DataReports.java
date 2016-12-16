@@ -108,33 +108,85 @@ public class DataReports {
     
       public String[] GChartBasicWebsiteStat(String website, Integer competitors){
         String table[] = new String[6];
-        table[0] = "data.addColumn('string', 'Domain');\r\n" +
+        //staty
+        table[0] = "data.addColumn('string', 'Domain');\r\n" + 
                    "data.addColumn('string', 'Data');\r\n" + 
                    "data.addColumn('number', 'Keywords');\r\n" +
                    "data.addColumn('number', 'Traffic');\r\n";
-        
+        //konkur
         table[1] = "data.addColumn('string', 'Competitor');\r\n" +
                    "data.addColumn('number', 'Relevance');\r\n" +
                    "data.addColumn('number', 'Common Keywords');\r\n" +
                    "data.addColumn('number', 'Keywords');\r\n" +
                    "data.addColumn('number', 'Traffic');\r\n";
         
-        table[2] = ""; //dane do table 0
-        table[3] = ""; //dane do table 1
-              
-        table[4] = "data.addColumn('string', 'Keyword');\r\n" +
+        //frazy
+        table[2] = "data.addColumn('string', 'Keyword');\r\n" +
                    "data.addColumn('string', 'URL');\r\n" + 
                    "data.addColumn('number', 'Pos');\r\n" +
                    "data.addColumn('number', 'Vol');\r\n" +
                    "data.addColumn('number', 'Tr. Share (%)');\r\n";
-        table[5] = ""; //dane do table 1
+        
+        table[3] = ""; //dane do table 0
+        table[4] = ""; //dane do table 1
+        table[5] = ""; //dane do table 2
 
  
         APIData appData = new  APIData();
         dbConnector db = new dbConnector();
         Boolean queryRes = false; 
         try {
+        //------------Staty------------------------//
+        // queryRes = db.... metoda do stat
+        if (queryRes == false) {
+                SemrushAPIConnector sem = new SemrushAPIConnector(this.apiKey);  
+                sem.testMode = this.testMode;      
+                queryRes = sem.getWebsiteStatsReport(appData, website, "pl", true); //top 5 fraz 
+                System.out.println("skorzystano z API");
+            }     
         
+         if (queryRes == true) {
+            Map<String[], APIWebsiteStats> websiteStat = appData.getResultsWebsiteStats();
+            if (websiteStat != null) {
+                       for (String[] key : websiteStat.keySet()) {
+                           table[3] += "['" + websiteStat.get(key).getWebsite() + "', " + 
+                                       "'" + websiteStat.get(key).getDataYYYYMM() + "', " + 
+                                       "{v:" + websiteStat.get(key).getKeywords() + "}, " + 
+                                       "{v:" + websiteStat.get(key).getTraffic() + "}],\r\n";
+                       }
+                   table[3] = table[3].trim();
+                   table[3] = table[3].substring(0, table[3].length()-1);
+                   }
+            }
+        
+        //------------Konkurencja------------------//
+        
+        // queryRes = db.... metoda do konkurencji
+        queryRes = false;
+        if (queryRes == false) {
+                SemrushAPIConnector sem = new SemrushAPIConnector(this.apiKey);  
+                sem.testMode = this.testMode;      
+                queryRes = sem.getWebsiteCompetitorsReport(appData,website,"pl", competitors);
+                System.out.println("skorzystano z API");
+            }    
+        
+            if (queryRes == true){
+                Map<String[], APIWebsiteCompetitors> websiteComp = appData.getResultsWebsiteCompetitors();
+                if (websiteComp != null) {
+                       for (String[] key : websiteComp.keySet()) {
+                          table[4] += "['" + websiteComp.get(key).getCompetitor() + "', " + 
+                                      "{v:" + websiteComp.get(key).getRelevance() + "}, " + 
+                                      "{v:" + websiteComp.get(key).getCommonKeywords() + "}, " + 
+                                      "{v:" + websiteComp.get(key).getKeywords() + "}, " + 
+                                      "{v:" + websiteComp.get(key).getTraffic() + "}],\r\n";
+                          }
+                      }
+
+                table[4] = table[4].trim();
+                table[4] = table[4].substring(0, table[4].length()-1);
+            }
+            
+        //------------FRAZY-----------------------//
         queryRes = db.getWebsitePhrasesReport(appData, website, "pl", "live", 100);
             if (queryRes == false) {
                 SemrushAPIConnector sem = new SemrushAPIConnector(this.apiKey);  
@@ -147,15 +199,14 @@ public class DataReports {
         Map<String[], APIWebsitePhrases> websiteKWs = appData.getResultsWebsitePhrases();
                        
             if (websiteKWs != null) {
-                for (String[] key : websiteKWs.keySet()) {
-                    //map.get(key)....
-                    table[5] += "['" + websiteKWs.get(key).getPhrase() + "', " + 
+                    for (String[] key : websiteKWs.keySet()) {
+                        table[5] += "['" + websiteKWs.get(key).getPhrase() + "', " + 
                                 "'" + websiteKWs.get(key).getUrl() + "', " + 
                                 "{v:" + websiteKWs.get(key).getPosition() + "}, " + 
                                 "{v:" + websiteKWs.get(key).getVolumen()+ "}, " + 
                                 "{v:" + websiteKWs.get(key).getTrafficShare() + "}],\r\n";
                    //System.out.println("semdb con:" + websiteKWs.get(key).getPhrase());
-                }
+                    }
                 table[5] = table[5].trim();
                 table[5] = table[5].substring(0, table[5].length()-1); 
                 System.out.println( table[5] );
