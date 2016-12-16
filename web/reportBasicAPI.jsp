@@ -117,10 +117,10 @@
                      data.addRows([ ${tableKWsContent} ]);
 
                     var options = {'title':'Raport konkurencji',
-                                   'page': 'disable',
+                                   'page': 'enable',
                                    'pageSize': 10,
                                    'showRowNumber': 'true',
-                                   'sortColumn': 1,
+                                   'sortColumn': 4,
                                    'sortAscending': false,
                                    'width': '100%',
                                    'height': '50%'};

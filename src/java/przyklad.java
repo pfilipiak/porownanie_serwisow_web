@@ -33,13 +33,13 @@ public class przyklad {
                                 "'" + websiteKWs.get(key).getUrl() + "', " + 
                                 "{v:" + websiteKWs.get(key).getPosition() + "}, " + 
                                 "{v:" + websiteKWs.get(key).getVolumen()+ "}, " + 
+                                "{v:" + websiteKWs.get(key).getTimestamp() + "}, " + 
                                 "{v:" + websiteKWs.get(key).getTrafficShare() + "}],\r\n";
-                    System.out.println("semdb:" + websiteKWs.get(key).getPhrase());
                 }
             }
 
             table[5] = table[5].trim();
             table[5] = table[5].substring(0, table[5].length()-1);   
-            System.out.println(Arrays.toString(table));
+            System.out.println(table[5]);
     }
 }

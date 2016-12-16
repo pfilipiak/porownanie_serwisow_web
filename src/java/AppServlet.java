@@ -96,8 +96,8 @@ public class AppServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             String website = getValueQS("website",request.getQueryString());
-            DataReports apdata = new DataReports("2fc1906300ddc89289961a1c3642a273", false);
-            //APIDataConnector apdata = new APIDataConnector(website, "live", "2fc1906300ddc89289961a1c3642a273", false);
+            DataReports apdata = new DataReports("--api key----", true);
+   
             String[] table = apdata.GChartBasicWebsiteStat(website, 5);
             String tableStatsHeader = table[0];
             String tableCompetitorsHeader = table[1];

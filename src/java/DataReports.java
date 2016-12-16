@@ -130,11 +130,21 @@ public class DataReports {
         table[5] = ""; //dane do table 1
 
  
-        APIData ap = new  APIData();
+        APIData appData = new  APIData();
         dbConnector db = new dbConnector();
+        Boolean queryRes = false; 
         try {
-        db.getWebsitePhrasesReport(ap, "media.pl", "pl", "live", 10 );
-        Map<String[], APIWebsitePhrases> websiteKWs = ap.getResultsWebsitePhrases();
+        
+        queryRes = db.getWebsitePhrasesReport(appData, website, "pl", "live", 100);
+            if (queryRes == false) {
+                SemrushAPIConnector sem = new SemrushAPIConnector(this.apiKey);  
+                sem.testMode = this.testMode;      
+                queryRes = sem.getWebsitePhrasesReport(appData, website, "pl", "live", 3); //top 5 fraz 
+                System.out.println("skorzystano z API");
+                if (queryRes == false) return table;
+            }
+
+        Map<String[], APIWebsitePhrases> websiteKWs = appData.getResultsWebsitePhrases();
                        
             if (websiteKWs != null) {
                 for (String[] key : websiteKWs.keySet()) {
@@ -144,13 +154,13 @@ public class DataReports {
                                 "{v:" + websiteKWs.get(key).getPosition() + "}, " + 
                                 "{v:" + websiteKWs.get(key).getVolumen()+ "}, " + 
                                 "{v:" + websiteKWs.get(key).getTrafficShare() + "}],\r\n";
-                    System.out.println("semdb con:" + websiteKWs.get(key).getPhrase());
+                   //System.out.println("semdb con:" + websiteKWs.get(key).getPhrase());
                 }
+                table[5] = table[5].trim();
+                table[5] = table[5].substring(0, table[5].length()-1); 
+                System.out.println( table[5] );
             }
-
-            //table[5] = table[5].trim();
-            //table[5] = table[5].substring(0, table[5].length()-1);   
-         System.out.println( Arrays.toString(table) );
+         
         } catch (SQLException e) {}
         
         return table;
