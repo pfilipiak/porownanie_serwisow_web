@@ -96,7 +96,7 @@ public class AppServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             String website = getValueQS("website",request.getQueryString());
-            DataReports apdata = new DataReports("---", true); //true = fake API z local
+            DataReports apdata = new DataReports("xx2fc1906300ddc89289961a1c3642a273", true); //true = fake API z local
    
             String[] table = apdata.GChartBasicWebsiteStat(website, 5);
             String tableStatsHeader = table[0];
