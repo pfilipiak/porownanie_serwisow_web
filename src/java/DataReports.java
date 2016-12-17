@@ -36,11 +36,11 @@ public class DataReports {
     public String[] GChartKeywordTableReport(String website, String date, Integer rows){
         
         String table[] = new String[4];
-        table[0] = "data.addColumn('string', 'Keyword');\r\n" +
-                   "data.addColumn('string', 'URL');\r\n" + 
-                   "data.addColumn('number', 'Pos');\r\n" +
-                   "data.addColumn('number', 'Vol');\r\n" +
-                   "data.addColumn('number', 'Tr. Share (%)');\r\n";
+        table[0] = "data.addColumn('string', 'Słowo kluczowe');\r\n" +
+                   "data.addColumn('string', 'Adres URL');\r\n" + 
+                   "data.addColumn('number', 'Pozycja');\r\n" +
+                   "data.addColumn('number', 'Wolumen');\r\n" +
+                   "data.addColumn('number', 'Udział ruchu (%)');\r\n";
         
         table[1] = "";
         table[2] = "";
@@ -109,23 +109,23 @@ public class DataReports {
       public String[] GChartBasicWebsiteStat(String website, Integer competitors){
         String table[] = new String[6];
         //staty
-        table[0] = "data.addColumn('string', 'Domain');\r\n" + 
+        table[0] = "data.addColumn('string', 'Domena');\r\n" + 
                    "data.addColumn('string', 'Data');\r\n" + 
-                   "data.addColumn('number', 'Keywords');\r\n" +
-                   "data.addColumn('number', 'Traffic');\r\n";
+                   "data.addColumn('number', 'Słowo kluczowe');\r\n" +
+                   "data.addColumn('number', 'Ruch');\r\n";
         //konkur
-        table[1] = "data.addColumn('string', 'Competitor');\r\n" +
-                   "data.addColumn('number', 'Relevance');\r\n" +
-                   "data.addColumn('number', 'Common Keywords');\r\n" +
-                   "data.addColumn('number', 'Keywords');\r\n" +
-                   "data.addColumn('number', 'Traffic');\r\n";
+        table[1] = "data.addColumn('string', 'Konkurent');\r\n" +
+                   "data.addColumn('number', 'Stosowność');\r\n" +
+                   "data.addColumn('number', 'Wspólne słowa kluczowe');\r\n" +
+                   "data.addColumn('number', 'Słowo kluczowe');\r\n" +
+                   "data.addColumn('number', 'Ruch');\r\n";
         
         //frazy
-        table[2] = "data.addColumn('string', 'Keyword');\r\n" +
-                   "data.addColumn('string', 'URL');\r\n" + 
-                   "data.addColumn('number', 'Pos');\r\n" +
-                   "data.addColumn('number', 'Vol');\r\n" +
-                   "data.addColumn('number', 'Tr. Share (%)');\r\n";
+        table[2] = "data.addColumn('string', 'Słowo kluczowe');\r\n" +
+                   "data.addColumn('string', 'Adres URL');\r\n" + 
+                   "data.addColumn('number', 'Pozycja');\r\n" +
+                   "data.addColumn('number', 'Wolumen');\r\n" +
+                   "data.addColumn('number', 'Udział ruchu (%)');\r\n";
         
         table[3] = ""; //dane do table 0
         table[4] = ""; //dane do table 1
