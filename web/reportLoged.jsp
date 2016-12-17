@@ -44,27 +44,7 @@
 							<header>
                                                             <h2>Statystyki <b>${website}</b></h2>
 							</header>
-                                                    
-                                                    <!-- skrypt reportStat -->
-                                                        <!--Div that will hold the pie chart-->
- 
-                                                        <!--
-                                                        <table>
-                                                            <tr>
-                                                                <td> <div id="chart_pos_div"></div></td>
-                                                                <td> <div id="chart_vol_div"></div></td>
-                                                            </tr>
-                                                        </table>
-                                                        -->
-                                                        
-                                                        <div id="table_div_stats"></div>
-                                                        <br><br>
-                                                        
-                                                        <div id="table_div_competitors"></div>
-                                                                        <br><br>
-                                                        
-                                                        <div id="table_div_KWs"></div>
-                                                    
+                                              
                                                        
 						</section>
 					</div>
