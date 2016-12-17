@@ -81,7 +81,7 @@
                      data.addRows([ ${tableStatsContent} ]);
 
                     var options = {'title':'Statysyki serwisu',
-                                   'page': 'disable',
+                                   'page': 'enable',
                                    'showRowNumber': 'true',
                                    'width': '100%',
                                    'height': '50%'};
@@ -175,7 +175,7 @@
                                                         Top 10 fraz
                                                         <div id="table_div_KWs"></div>
                                                         
-                                                        <p><a href="#">Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
+                                                        <p><a href="javascript.print()">Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
                                                     
 						</section>
 					</div>

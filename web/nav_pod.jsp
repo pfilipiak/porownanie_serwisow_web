@@ -8,11 +8,11 @@
 <div id="content" class="10u skel-cell-important">
     <nav id="nav_pod">
     <ul>
-        <li><a href="#">Analiza ogólna</a></li>
+        <li><a href="#">Dane ogólne</a></li>
         <li><a href="#">Ruch organiczny</a></li>    
-        <li><a href="#">Linki zwrotne</a></li>
-        <li><a href="#">Płatna reklama</a></li>    
-        <li><a href="#">Historyczne</a></li>     
+        <li><a href="#">Pozycja i wolumen</a></li>
+        <li><a href="#">Konkurencja</a></li>    
+        <li><a href="#">Trendy</a></li>     
     </ul>
     </nav>
     
