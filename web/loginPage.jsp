@@ -45,8 +45,9 @@
                                                         <input type="password" id="log_password" name="password" required>
                                                         <div id="log_lower">
                                                             <input type="checkbox"><label class="log_check" for="checkbox">Zapamiętaj mnie!</label>
+                                                            <br>
                                                             <input class="button" type="button" value="Zaloguj" onClick="check();">
-                                                            <a href="#">Nie masz konta? Zarejestruj się...</a>
+                                                            <br><a href="#">Nie masz konta? Zarejestruj się...</a>
                                                         </div>
                                                     </form>
                                                     

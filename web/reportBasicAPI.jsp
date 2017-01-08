@@ -34,6 +34,7 @@
                   google.charts.setOnLoadCallback(drawTableBasicStats);
                   google.charts.setOnLoadCallback(drawTableCompetitors);
                   google.charts.setOnLoadCallback(drawTableKWs);
+                  //google.charts.setOnLoadCallback(drawToolbar);
                   
                   // Callback that creates and populates a data table,
                   // instantiates the pie chart, passes in the data and
@@ -107,6 +108,7 @@
                     //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
                     var table = new google.visualization.Table(document.getElementById('table_div_competitors'));
                     table.draw(data, options);
+                    
                   }
                   
                   //
@@ -127,8 +129,32 @@
                     //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
                     var table = new google.visualization.Table(document.getElementById('table_div_KWs'));
                     table.draw(data, options);
+                    
+                    //CSV export
+                    var csvContent = "data:text/csv;charset=utf-8,";
+                    data.forEach(function(infoArray, index){
+
+                       dataString = infoArray.join(",");
+                       csvContent += index < data.length ? dataString+ "\n" : dataString;
+
+                    }); 
+                    var encodedUri = encodeURI(csvContent);
+                    
+                    /*
+                    drawToolbar(){
+                    var components = [
+                        {type: 'html', datasource: data,
+                        {type: 'csv', datasource: data}
+                        
+                    ];
+                    
+                    var container = document.getElementById('toolbar_div');
+                    google.visualization.drawToolbar(container, components);
+                  };
+                    
                   }
-                  
+                  */
+}
                   //
                 </script>
                 
@@ -174,8 +200,8 @@
                                                                         <br><br>
                                                         Top 10 fraz
                                                         <div id="table_div_KWs"></div>
-                                                        
-                                                        <p><a href="javascript.print()">Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
+                                                        <div id="toolbar_div"></div>
+                                                        <p><a href=#>Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
                                                     
 						</section>
 					</div>

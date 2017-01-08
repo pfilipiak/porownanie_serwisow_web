@@ -1030,7 +1030,8 @@
 	#sidebar h2
 	{
 		display: block;
-		padding-bottom: 0.50em;
+                padding-bottom: 0;
+		/*padding-bottom: 0.50em;*/
 	}
         
         #sidebar > ul
@@ -1047,7 +1048,8 @@
         #sidebar > ul > li > span
         {
                 display: block;
-                padding: 1em 1em;
+                /*padding: 1em 1em;*/
+                padding: 0 0;
                 letter-spacing: 0.06em;
                 text-decoration: none;
                 outline: 0;
@@ -1261,6 +1263,7 @@
 /* login page
 /*********************************************************************************/
  
+
 #log_panel 
 {
     width: 400px;
@@ -1324,6 +1327,7 @@
 
 #log_panel .button {
     position: relative;
-    left: 100px;
+    width: 360px; 
+    padding: 10px 5px;
+    
 }
-

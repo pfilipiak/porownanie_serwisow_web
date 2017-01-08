@@ -90,7 +90,7 @@
                                             </TR>
                                             <TR>
                                             <TD> </TD>
-                                            <TD><INPUT TYPE="submit" VALUE="Wyślij email teraz!">
+                                            <TD><INPUT TYPE="submit" VALUE="Wyślij">
                                             <INPUT TYPE="reset" VALUE="Reset"></TD>
                                             </TR>
                                             </TABLE>

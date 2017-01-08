@@ -14,7 +14,7 @@
 					<ul>
 						<li class="active"><a href="index.jsp">Strona główna</a></li>
                                                 <li><a href="analizaSerwisu.jsp">Analiza serwisu</a></li>
-                                                <li><a href="#">Serwis do serwisu</a></li>    
+                                                <li><a href="serviceToService.jsp">Serwis do serwisu</a></li>    
                                                 <li><a href="#">Trendy</a></li>
                                                 <li><a href="contact.jsp">Kontakt</a></li>
                                                 <li><a href="loginPage.jsp">Logowanie</a></li>
