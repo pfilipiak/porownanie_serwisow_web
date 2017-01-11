@@ -27,6 +27,12 @@ public class AppServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private String semrush_api_key = "xx2fc......";
+    private Boolean fake_default_rep = true;
+    private Boolean fake_basicStats = true;
+    private Boolean fake_competitors = true;
+    
+            
     protected void processServletRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -36,7 +42,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String date = getValueQS("date",request.getQueryString());
         
-            APIDataConnector apdata = new APIDataConnector(website, date, "---api-key----", true);
+            APIDataConnector apdata = new APIDataConnector(website, date, semrush_api_key, fake_default_rep);
             
             out.println("<!DOCTYPE html>");
             out.println("<html lang=\"pl\">");
@@ -69,7 +75,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String date = getValueQS("date",request.getQueryString());
             
-            APIDataConnector apdata = new APIDataConnector(website, date, "---api-key---", true);
+            APIDataConnector apdata = new APIDataConnector(website, date, semrush_api_key, fake_default_rep);
             String[] table = apdata.GChartKeywordTableReport(website, date, 1000);
             String tableHeader = table[0];
             String tableContent = table[1];    
@@ -84,7 +90,7 @@ public class AppServlet extends HttpServlet {
             request.setAttribute("tableContent", tableContent); //
             request.setAttribute("posStats", posStats); //
             request.setAttribute("volStats", volStats); //
-            request.getRequestDispatcher("/reportStat.jsp").forward(request, response);
+            request.getRequestDispatcher("/reportDemo.jsp").forward(request, response);
         }
     }
  
@@ -96,7 +102,7 @@ public class AppServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             String website = getValueQS("website",request.getQueryString());
-            DataReports apdata = new DataReports("----", true); //true = fake API z local
+            DataReports apdata = new DataReports(semrush_api_key, fake_basicStats); //true = fake API z local
    
             String[] table = apdata.GChartBasicWebsiteStat(website, 5);
             String tableStatsHeader = table[0];
@@ -116,10 +122,44 @@ public class AppServlet extends HttpServlet {
             request.setAttribute("tableCompetitorsContent", tableCompetitorsContent); //
             request.setAttribute("tableKWsHeader", tableKWsHeader); //
             request.setAttribute("tableKWsContent", tableKWsContent); //
-            request.getRequestDispatcher("/reportBasicAPI.jsp").forward(request, response);
+            request.getRequestDispatcher("/reportBasicStats.jsp").forward(request, response);
         }
     }
         
+    
+    
+     protected void processRequestToCompetitorStats(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+            String website = getValueQS("website",request.getQueryString());
+            DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
+   
+            String[] table = apdata.GChartCompetitorsWebsiteStat(website, 5);
+            String tableStatsHeader = table[0];
+            String tableCompetitorsHeader = table[1];
+            String tableKWsHeader = table[2];
+                        
+            String tableStatsContent = table[3];
+            String tableCompetitorsContent = table[4]; 
+            String tableKWsContent = table[5];
+            
+           //System.out.println(Arrays.toString(table));
+            
+            request.setAttribute("website", website + "hahah"); // This will be available as ${message}
+            request.setAttribute("tableStatsHeader", tableStatsHeader); //
+            request.setAttribute("tableCompetitorsHeader", tableCompetitorsHeader); //
+            //request.setAttribute("tableStatsContent", tableStatsContent); //
+            //request.setAttribute("tableCompetitorsContent", tableCompetitorsContent); //
+            request.setAttribute("tableKWsHeader", tableKWsHeader); //
+            //request.setAttribute("tableKWsContent", tableKWsContent); //
+            request.getRequestDispatcher("/reportCompetitors.jsp").forward(request, response);
+        }
+    }
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -139,7 +179,11 @@ public class AppServlet extends HttpServlet {
             processRequestToReport1(request, response);
         } else if (qs.contains("r=basic")) {
             processRequestToBasicStats(request, response);
-        }  else {
+        }  
+        else if (qs.contains("r=competitor")) {
+            processRequestToCompetitorStats(request, response);
+            
+        } else {
             processServletRequest(request, response);
         }
     }

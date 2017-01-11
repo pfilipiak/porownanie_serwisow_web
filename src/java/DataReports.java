@@ -1,5 +1,7 @@
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import porownanie_serwisow.api.APIData;
 import porownanie_serwisow.api.APIWebsiteCompetitors;
@@ -105,6 +107,8 @@ public class DataReports {
         //System.out.println(table[3]);
         return table;
     }
+    
+    // powazne funkcje:) //
     
       public String[] GChartBasicWebsiteStat(String website, Integer competitors){
         String table[] = new String[6];
@@ -216,7 +220,73 @@ public class DataReports {
         
         return table;
     }
-    
+      //end basic Stats
+      
+      //Competitors
+      public String[] GChartCompetitorsWebsiteStat(String website, Integer competitors){
+        String table[] = new String[6];
+        //staty
+        table[0] = "data.addColumn('string', 'Domena');\r\n" + 
+                   "data.addColumn('string', 'Data');\r\n" + 
+                   "data.addColumn('number', 'Słowo kluczowe');\r\n" +
+                   "data.addColumn('number', 'Ruch');\r\n";
+        //konkur
+        table[1] = "data.addColumn('string', 'Konkurent');\r\n" +
+                   "data.addColumn('number', 'Stosowność');\r\n" +
+                   "data.addColumn('number', 'Wspólne słowa kluczowe');\r\n" +
+                   "data.addColumn('number', 'Słowo kluczowe');\r\n" +
+                   "data.addColumn('number', 'Ruch');\r\n";
+        
+        //frazy
+        table[2] = "data.addColumn('string', 'Słowo kluczowe');\r\n" +
+                   "data.addColumn('string', 'Adres URL');\r\n" + 
+                   "data.addColumn('number', 'Pozycja');\r\n" +
+                   "data.addColumn('number', 'Wolumen');\r\n" +
+                   "data.addColumn('number', 'Udział ruchu (%)');\r\n";
+        
+        table[3] = ""; //dane do table 0
+        table[4] = ""; //dane do table 1
+        table[5] = ""; //dane do table 2
+
+ 
+        dbConnector db = new dbConnector();
+        Boolean queryRes = false; 
+        try {
+        //------------Staty------------------------//
+        // queryRes = db.... metoda do stat
+            ArrayList<String> resList = new ArrayList<>();
+            String[] myArrayKWs = new String[13];
+            String[] myArrayVol = new String[13];
+            //resList.add("spier ");
+            queryRes = db.getWebsiteCompetitorsReport(resList, website, "count(*)");
+            
+            if (queryRes == true)
+            {
+                myArrayKWs = resList.toArray(new String[0]);
+                java.util.Arrays.sort(myArrayKWs);
+            }
+            
+            resList.clear();
+            queryRes = db.getWebsiteCompetitorsReport(resList, website, "sum(search_volume)");
+            
+            if (queryRes == true)
+            {
+                myArrayVol = resList.toArray(new String[0]);
+                java.util.Arrays.sort(myArrayVol);
+            }
+                
+            //print
+            System.out.println("Liczby fraz wraz z konkurencja");
+            for (int x=0; x<myArrayKWs.length; x++) System.out.println(myArrayKWs[x]);
+            System.out.println("Sumy wraz z konkurencja");
+            for (int x=0; x<myArrayVol.length; x++) System.out.println(myArrayVol[x]);
+
+        } catch (SQLException e) {}
+        
+        return table;
+    }      
+      
+      //end Competitors
 
     public Boolean getIsLive() {
         return IsLive;

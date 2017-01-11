@@ -11,7 +11,7 @@
         <li><a href="#">Dane ogólne</a></li>
         <li><a href="#">Ruch organiczny</a></li>    
         <li><a href="#">Pozycja i wolumen</a></li>
-        <li><a href="#">Konkurencja</a></li>    
+        <li><a href="./Reports?r=competitor&website=${website}">Konkurencja</a></li>    
         <li><a href="#">Trendy</a></li>     
     </ul>
     </nav>
