@@ -3,7 +3,9 @@
     Created on : 2016-12-14, 13:44:47
     Author     : Piotr
 --%>
-
+<jsp:include page="include.jsp"/>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 	<!-- Header -->
@@ -14,10 +16,20 @@
 					<ul>
 						<li class="active"><a href="index.jsp">Strona główna</a></li>
                                                 <li><a href="analizaSerwisu.jsp">Analiza serwisu</a></li>
-                                                <li><a href="serviceToService.jsp">Serwis do serwisu</a></li>    
+                                         <!--   <li><a href="serviceToService.jsp">Serwis do serwisu</a></li>    -->
                                                 <li><a href="#">Trendy</a></li>
                                                 <li><a href="contact.jsp">Kontakt</a></li>
-                                                <li><a href="loginPage.jsp">Logowanie</a></li>
+                                                <shiro:authenticated>
+                                                    <li><a href="account/"><shiro:user>
+        <%
+            request.setAttribute("account", org.apache.shiro.SecurityUtils.getSubject().getPrincipals().oneByType(java.util.Map.class));
+        %>
+        Witaj, <c:out value="${account.givenName}"/></shiro:user>!</a></li>
+                                                    <li><a href="<c:url value="/logout"/>">Wyloguj się</a></li>
+                                                
+                                                </shiro:authenticated>
+                                                <shiro:notAuthenticated><li><a href="loginPage.jsp">Logowanie</a></li></shiro:notAuthenticated>
+                                            
                                                 <li>
                                                     <form action="Reports?r=1" method="get">
                                                         <input type="hidden" name="r" value="basic">

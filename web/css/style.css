@@ -1266,7 +1266,7 @@
 
 #log_panel 
 {
-    width: 400px;
+    width: 100%;
     margin: 0 auto; 
     padding: 15px 0 0;
     background: #fff;
@@ -1296,7 +1296,7 @@
 #log_username, #log_password 
 {
     display: block;
-    width: 360px; 
+    width: 100%; 
     margin: 0 auto;
     padding: 10px 5px;
     border: 1px solid silver;
@@ -1305,12 +1305,12 @@
 }
 #log_username:focus, #log_password:focus 
 {
-    outline: 5px solid #e5f2f8;
+    outline: 5px solid #70AA7E;
 }
 
 #log_lower 
 {
-    width: 400px;
+    width: 100%;
     padding: 5px 20px;
     margin-top: 20px;
     
@@ -1325,9 +1325,9 @@
 }
 
 
-#log_panel .button {
+#log_button {
     position: relative;
-    width: 360px; 
+    width: 100%; 
     padding: 10px 5px;
     
 }

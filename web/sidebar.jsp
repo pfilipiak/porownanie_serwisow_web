@@ -3,7 +3,9 @@
     Created on : 2016-12-14, 23:13:09
     Author     : Piotr
 --%>
-
+<jsp:include page="include.jsp"/>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="sidebar" class="2u">
         <section>
@@ -13,11 +15,18 @@
                 <div class="row">
                         <section class="10u">
                                 <ul class="default">
-                                        <li><a href="#">Konto użytkownika ${user}</a></li>
-                                        <li><a href="#">Klucz dostępu</a></li>
-                                        <li><a href="#">Obserwowane domeny</a></li>
-                                        <li><a href="#">Zdefiniowana konkurencja</a></li>
-                                        <li><a href="#">Ustaw monitoring i alerty</a></li>
+                                        <shiro:authenticated>
+                                            <li><a href="#">Konto użytkownika <shiro:user><c:out value="${account.givenName}"/></shiro:user></a></li>
+                                            <li><a href="#">Klucz dostępu</a></li>
+                                            <li><a href="#">Obserwowane domeny</a></li>
+                                            <li><a href="#">Zdefiniowana konkurencja</a></li>
+                                            <li><a href="#">Ustaw monitoring i alerty</a></li>
+                                            <li><a href="<c:url value="/logout"/>">Wyloguj się</a></li>
+                                        </shiro:authenticated>
+                                        <shiro:notAuthenticated>
+                                            <li><a href="loginPage.jsp">Zaloguj się</a></li>
+                                        </shiro:notAuthenticated>
+                                        
                                 </ul>
                         </section>
                                                                                 </div>
