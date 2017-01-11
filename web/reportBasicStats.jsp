@@ -1,10 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<%-- 
-    Document   : reportBasicAPI
-    Created on : 2016-12-14, 19:33:13
-    Author     : Piotr
---%>
+ 
 <html>
 	<head>
 		<title>Porównywarka serwisów</title>

@@ -275,7 +275,7 @@ public class DataReports {
                 java.util.Arrays.sort(myArrayVol);
             }
                 
-            //print
+            //print report
             System.out.println("Liczby fraz wraz z konkurencja");
             for (int x=0; x<myArrayKWs.length; x++) System.out.println(myArrayKWs[x]);
             System.out.println("Sumy wraz z konkurencja");
