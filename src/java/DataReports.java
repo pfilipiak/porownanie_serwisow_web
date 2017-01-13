@@ -223,31 +223,11 @@ public class DataReports {
       //end basic Stats
       
       //Competitors
-      public String[] GChartCompetitorsWebsiteStat(String website, Integer competitors){
-        String table[] = new String[6];
+      public String[] GChartCompetitorsWebsiteStat(String website, String aggrQuery, String whereQuery){
+        String table[] = new String[2];
         //staty
-        table[0] = "data.addColumn('string', 'Domena');\r\n" + 
-                   "data.addColumn('string', 'Data');\r\n" + 
-                   "data.addColumn('number', 'Słowo kluczowe');\r\n" +
-                   "data.addColumn('number', 'Ruch');\r\n";
-        //konkur
-        table[1] = "data.addColumn('string', 'Konkurent');\r\n" +
-                   "data.addColumn('number', 'Stosowność');\r\n" +
-                   "data.addColumn('number', 'Wspólne słowa kluczowe');\r\n" +
-                   "data.addColumn('number', 'Słowo kluczowe');\r\n" +
-                   "data.addColumn('number', 'Ruch');\r\n";
-        
-        //frazy
-        table[2] = "data.addColumn('string', 'Słowo kluczowe');\r\n" +
-                   "data.addColumn('string', 'Adres URL');\r\n" + 
-                   "data.addColumn('number', 'Pozycja');\r\n" +
-                   "data.addColumn('number', 'Wolumen');\r\n" +
-                   "data.addColumn('number', 'Udział ruchu (%)');\r\n";
-        
-        table[3] = ""; //dane do table 0
-        table[4] = ""; //dane do table 1
-        table[5] = ""; //dane do table 2
-
+        table[0] = ""; //count(KWs) lub sum()
+        table[1] = ""; //dane do table 0 
  
         dbConnector db = new dbConnector();
         Boolean queryRes = false; 
@@ -255,31 +235,48 @@ public class DataReports {
         //------------Staty------------------------//
         // queryRes = db.... metoda do stat
             ArrayList<String> resList = new ArrayList<>();
-            String[] myArrayKWs = new String[13];
+            String[] myArrayData = new String[13];
             String[] myArrayVol = new String[13];
             //resList.add("spier ");
-            queryRes = db.getWebsiteCompetitorsReport(resList, website, "count(*)");
+            queryRes = db.getWebsiteCompetitorsReport(resList, website, aggrQuery, whereQuery);
             
             if (queryRes == true)
             {
-                myArrayKWs = resList.toArray(new String[0]);
-                java.util.Arrays.sort(myArrayKWs);
+                myArrayData = resList.toArray(new String[0]);
+                java.util.Arrays.sort(myArrayData);
             }
             
             resList.clear();
-            queryRes = db.getWebsiteCompetitorsReport(resList, website, "sum(search_volume)");
-            
-            if (queryRes == true)
-            {
-                myArrayVol = resList.toArray(new String[0]);
-                java.util.Arrays.sort(myArrayVol);
-            }
-                
+            //queryRes = db.getWebsiteCompetitorsReport(resList, website, "sum(search_volume)");
+                            
             //print report
-            System.out.println("Liczby fraz wraz z konkurencja");
-            for (int x=0; x<myArrayKWs.length; x++) System.out.println(myArrayKWs[x]);
-            System.out.println("Sumy wraz z konkurencja");
-            for (int x=0; x<myArrayVol.length; x++) System.out.println(myArrayVol[x]);
+            System.out.println("Liczby zwiazane z konkurencja");
+            if (myArrayData.length>1) {
+                
+             //nagłowki do GChart   
+            String headerCompact = myArrayData[myArrayData.length -1];
+            String [] headerContent = headerCompact.split(",");
+                if (headerContent.length>1) {
+                table[0] = "data.addColumn('string', 'Miesiąc');\r\n";
+                    for (int k=1; k<headerContent.length;k++)
+                        table[0] = table[0] + "data.addColumn('number', '"+headerContent[k]+"');\r\n";
+                }
+                table[0] = table[0].trim();
+             //end naglowki
+             
+             //dane tabelaryczne (na ostatnim jest header stad length-1
+                for (int k=0; k<myArrayData.length-1; k++) 
+                {//System.out.println(myArrayData[k]);
+                 table[1] = table[1] + "["+myArrayData[k]+"],\r\n" ;
+                 //['201605', 45, 60, 89, 100],
+                }
+                table[1] = table[1].trim();
+                table[1] = table[1].substring(0, table[1].length()-1); 
+                
+                System.out.println( table[0] );
+                System.out.println( table[1] );
+                        
+            }
 
         } catch (SQLException e) {}
         

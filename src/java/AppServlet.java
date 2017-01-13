@@ -137,24 +137,22 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
    
-            String[] table = apdata.GChartCompetitorsWebsiteStat(website, 5);
-            String tableStatsHeader = table[0];
-            String tableCompetitorsHeader = table[1];
-            String tableKWsHeader = table[2];
-                        
-            String tableStatsContent = table[3];
-            String tableCompetitorsContent = table[4]; 
-            String tableKWsContent = table[5];
-            
+            String[] tableCompKWs = apdata.GChartCompetitorsWebsiteStat(website, "count(*)", "where position < 11");
+            String tableCompKWsHeader = tableCompKWs[0];
+            String tableCompKWsContent = tableCompKWs[1];
+ 
+            String[] tableCompVol = apdata.GChartCompetitorsWebsiteStat(website, "sum(search_volume)", "where position < 11");
+            String tableCompVolHeader = tableCompVol[0];
+            String tableCompVolContent = tableCompVol[1];
            //System.out.println(Arrays.toString(table));
             
             request.setAttribute("website", website + "hahah"); // This will be available as ${message}
-            request.setAttribute("tableStatsHeader", tableStatsHeader); //
-            request.setAttribute("tableCompetitorsHeader", tableCompetitorsHeader); //
-            //request.setAttribute("tableStatsContent", tableStatsContent); //
-            //request.setAttribute("tableCompetitorsContent", tableCompetitorsContent); //
-            request.setAttribute("tableKWsHeader", tableKWsHeader); //
-            //request.setAttribute("tableKWsContent", tableKWsContent); //
+            request.setAttribute("tableCompKWsHeader", tableCompKWsHeader); //
+            request.setAttribute("tableCompKWsContent", tableCompKWsContent); //
+
+            request.setAttribute("tableCompVolHeader", tableCompVolHeader); //
+            request.setAttribute("tableCompVolContent", tableCompVolContent); //
+            
             request.getRequestDispatcher("/reportCompetitors.jsp").forward(request, response);
         }
     }

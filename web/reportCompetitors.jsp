@@ -22,142 +22,181 @@
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
                 
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script type="text/javascript">
-                    
-                  // Load the Visualization API and the corechart package.
-                google.charts.load('current', {'packages':['corechart', 'table']});
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('visualization', '1', { packages: ['controls'] });
+		google.charts.setOnLoadCallback(drawKWsCountChart);
+		google.charts.setOnLoadCallback(drawVolSumChart);
 
-                  // Set a callback to run when the Google Visualization API is loaded.
-                  //google.charts.setOnLoadCallback(drawChartPos);
-                  //google.charts.setOnLoadCallback(drawChartVol);
-                google.charts.setOnLoadCallback(drawTableBasicStats);
-                google.charts.setOnLoadCallback(drawTableCompetitors);
-                google.charts.setOnLoadCallback(drawTableKWs);
-                  //google.charts.setOnLoadCallback(drawToolbar);
-                  
-                  // Callback that creates and populates a data table,
-                  // instantiates the pie chart, passes in the data and
-                  // draws it.
-                  function drawChartPos() {
+		function drawKWsCountChart() {
+		  var data = new google.visualization.DataTable();
 
-                    // Create the data table.
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Topping');
-                    data.addColumn('number', 'Slices');
-                    data.addRows([ ${posStats} ]);
+		  ${tableCompKWsHeader}
+		  
+		  data.addRows([
+			${tableCompKWsContent}
+		  ]);
 
-                    // Set chart options
-                    var options = {'title':'Rozkład pozycji z 1000 fraz',
-                                   'width':400,
-                                   'height':280};
+		  var columnsTable = new google.visualization.DataTable();
+		  columnsTable.addColumn('number', 'colCountKWsIndex');
+		  columnsTable.addColumn('string', 'colCountKWsLabel');
+		  var initState = {
+			selectedValues: []
 
-                    // Instantiate and draw our chart, passing in some options.
-                    var chart = new google.visualization.PieChart(document.getElementById('chart_pos_div'));
-                    chart.draw(data, options);
-                  }
+		  };
+		  // put the columns into this data table (skip column 0)
+		  for (var i = 1; i < data.getNumberOfColumns(); i++) {
+			columnsTable.addRow([i, data.getColumnLabel(i)]);
+			// you can comment out this next line if you want to have a default selection other than the whole list
+			initState.selectedValues.push(data.getColumnLabel(i));
+		  }
+		  // you can set individual columns to be the default columns (instead of populating via the loop above) like this:
+		  // initState.selectedValues.push(data.getColumnLabel(4));
 
-                   function drawChartVol() {
+		  var chart = new google.visualization.ChartWrapper({
+			chartType: 'Bar',
+			containerId: 'chartCountKWs_div',
+			dataTable: data,
+			options: {
+			  'title': 'Rozkład liczby pozycji',
+			  width: 900,
+			  height: 400,
+			}
+		  });
 
-                    // Create the data table.
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Topping');
-                    data.addColumn('number', 'Slices');
-                    data.addRows([ ${volStats} ]);
+		  var columnFilterCountKWs = new google.visualization.ControlWrapper({
+			controlType: 'CategoryFilter',
+			containerId: 'colFilterCountKWs_div',
+			dataTable: columnsTable,
+			options: {
+			  filterColumnLabel: 'colCountKWsLabel',
+			  ui: {
+				label: '',
+				allowTyping: false,
+				allowMultiple: true,
+				allowNone: false
+				, selectedValuesLayout: 'below'
+			  }
+			},
+			state: initState
+		  });
+				
+		  function setChartView() {
+			var state = columnFilterCountKWs.getState();
+			var row;
+			var view = {
+			  columns: [0]
+			};
 
-                    // Set chart options        
-                    var options = {'title':'Rozkład wolumenu wyszukań z 1000 fraz',
-                                   'width':400,
-                                   'height':280};
+			for (var i = 0; i < state.selectedValues.length; i++) {
+			  row = columnsTable.getFilteredRows([{
+				column: 1,
+				value: state.selectedValues[i]
+			  }])[0];
+			  view.columns.push(columnsTable.getValue(row, 0));
+			}
+			// sort the indices into their original order
+			view.columns.sort(function(a, b) {
+			  return (a - b);
+			});
+			
+			chart.setView(view);
+			chart.draw();
+		  }
+		  
+		  google.visualization.events.addListener(columnFilterCountKWs, 'statechange', setChartView);
 
-                    // Instantiate and draw our chart, passing in some options.
-                    var chart = new google.visualization.PieChart(document.getElementById('chart_vol_div'));
-                    chart.draw(data, options);
-                  }
-                  //
-                  function drawTableBasicStats() {
-                    var data = new google.visualization.DataTable();
-                    //kolumny
-                    ${tableStatsHeader}
-                     data.addRows([ ${tableStatsContent} ]);
+		  setChartView();
+		  columnFilterCountKWs.draw();
+		}
+		 
 
-                    var options = {'title':'Statysyki serwisu',
-                                   'page': 'enable',
-                                   'showRowNumber': 'true',
-                                   'width': '100%',
-                                   'height': '50%'};
-                    //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
-                    var table = new google.visualization.Table(document.getElementById('table_div_stats'));
-                    table.draw(data, options);
-                  }
-                  
-                   function drawTableCompetitors() {
-                    var data = new google.visualization.DataTable();
-                    //kolumny
-                    ${tableCompetitorsHeader}
-                     data.addRows([ ${tableCompetitorsContent} ]);
+////////////////////////////////
+		function drawVolSumChart() {
+		  var data = new google.visualization.DataTable();
 
-                    var options = {'title':'Raport konkurencji',
-                                   'page': 'disable',
-                                   'pageSize': 10,
-                                   'showRowNumber': 'true',
-                                   'sortColumn': 1,
-                                   'sortAscending': false,
-                                   'width': '100%',
-                                   'height': '50%'};
-                    //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
-                    var table = new google.visualization.Table(document.getElementById('table_div_competitors'));
-                    table.draw(data, options);
-                    
-                  }
-                  
-                  //
-                   function drawTableKWs() {
-                    var data = new google.visualization.DataTable();
-                    //kolumny
-                    ${tableKWsHeader}
-                     data.addRows([ ${tableKWsContent} ]);
+		  ${tableCompVolHeader}
+		  
+		  data.addRows([
+                    ${tableCompVolContent}
+		  ]);
 
-                    var options = {'title':'Raport konkurencji',
-                                   'page': 'enable',
-                                   'pageSize': 10,
-                                   'showRowNumber': 'true',
-                                   'sortColumn': 4,
-                                   'sortAscending': false,
-                                   'width': '100%',
-                                   'height': '50%'};
-                    //https://developers.google.com/chart/interactive/docs/gallery/table#configuration-options
-                    var table = new google.visualization.Table(document.getElementById('table_div_KWs'));
-                    table.draw(data, options);
-                    
-                    //CSV export
-                    var csvContent = "data:text/csv;charset=utf-8,";
-                    data.forEach(function(infoArray, index){
+		  var columnsTable = new google.visualization.DataTable();
+		  columnsTable.addColumn('number', 'colSumVolIndex');
+		  columnsTable.addColumn('string', 'colSumVolLabel');
+		  var initState = {
+			selectedValues: []
 
-                       dataString = infoArray.join(",");
-                       csvContent += index < data.length ? dataString+ "\n" : dataString;
+		  };
+		  // put the columns into this data table (skip column 0)
+		  for (var i = 1; i < data.getNumberOfColumns(); i++) {
+			columnsTable.addRow([i, data.getColumnLabel(i)]);
+			// you can comment out this next line if you want to have a default selection other than the whole list
+			initState.selectedValues.push(data.getColumnLabel(i));
+		  }
+		  // you can set individual columns to be the default columns (instead of populating via the loop above) like this:
+		  // initState.selectedValues.push(data.getColumnLabel(4));
 
-                    }); 
-                    var encodedUri = encodeURI(csvContent);
-                    
-                    /*
-                    drawToolbar(){
-                    var components = [
-                        {type: 'html', datasource: data,
-                        {type: 'csv', datasource: data}
-                        
-                    ];
-                    
-                    var container = document.getElementById('toolbar_div');
-                    google.visualization.drawToolbar(container, components);
-                  };
-                    
-                  }
-                  */
-}
-                  //
-                </script>
-                
+		  var chart = new google.visualization.ChartWrapper({
+			chartType: 'Bar',
+			containerId: 'chartVolSum_div',
+			dataTable: data,
+			options: {
+			  'title': 'Rozkład sumy liczby wyszukiwań',
+			  width: 900,
+			  height: 400,
+			}
+		  });
+
+		  var columnFilterSumVol = new google.visualization.ControlWrapper({
+			controlType: 'CategoryFilter',
+			containerId: 'colFilterSumVol_div',
+			dataTable: columnsTable,
+			options: {
+			  filterColumnLabel: 'colSumVolLabel',
+			  ui: {
+				label: '',
+				allowTyping: false,
+				allowMultiple: true,
+				allowNone: false
+				, selectedValuesLayout: 'below'
+			  }
+			},
+			state: initState
+		  });
+				
+		  function setChartView() {
+			var state = columnFilterSumVol.getState();
+			var row;
+			var view = {
+			  columns: [0]
+			};
+
+			for (var i = 0; i < state.selectedValues.length; i++) {
+			  row = columnsTable.getFilteredRows([{
+				column: 1,
+				value: state.selectedValues[i]
+			  }])[0];
+			  view.columns.push(columnsTable.getValue(row, 0));
+			}
+			// sort the indices into their original order
+			view.columns.sort(function(a, b) {
+			  return (a - b);
+			});
+			
+			chart.setView(view);
+			chart.draw();
+		  }
+		  
+		  google.visualization.events.addListener(columnFilterSumVol, 'statechange', setChartView);
+
+		  setChartView();
+		  columnFilterSumVol.draw();
+		}
+		  		 
+
+
+	</script>
 	</head>
 	<body>
 
@@ -170,41 +209,45 @@
 				<div class="row">
 
 					<!-- Sidebar -->
-					<%@include file="sidebar.jsp" %>					
-					<!-- Content -->
-                                        <%@include file="nav_pod.jsp" %>					
+				<%@include file="sidebar.jsp" %>					
+				<!-- Content -->
+                                <%@include file="nav_pod.jsp" %>					
 
-						<section>
-                                                    <br>
-							<header>
-                                                            <h2>Porównanie konkurencji <b>${website}</b></h2>
-							</header>
+                                <section>
+                                        <br>
+					<header>
+                                            <h2>Porównanie konkurencji <b>${website}</b></h2>
+					</header>
                                                     
-                                                    <!-- skrypt reportStat -->
-                                                        <!--Div that will hold the pie chart-->
- 
-                                                        <!--
-                                                        <table>
-                                                            <tr>
-                                                                <td> <div id="chart_pos_div"></div></td>
-                                                                <td> <div id="chart_vol_div"></div></td>
-                                                            </tr>
-                                                        </table>
-                                                        -->
+                                        <table>
+                                        <tr><td>
+                                            <h3>Rozkład liczby słów kluczowych</h3>
+                                            <div id="colFilterCountKWs_div"></div>
+                                            <br>
+                                        </td>
+                                        </tr>
+                                        <tr><td>
+                                                <div id="chartCountKWs_div"></div>
+                                                <br>
+                                        </td>
+                                        </tr>
+                                        <tr><td>
+                                                <h3>Rozkład sumy wyszukiwań słów kluczowych</h3>
+                                                <div id="colFilterSumVol_div"></div>
+                                                <br>
+                                        </td>
+                                        </tr>
+                                        <tr><td>
+                                                <div id="chartVolSum_div"></div>
+                                        </td>
+                                        </tr>
+                                        </table>
                                                         
-                                                        Statystyki serwisu
-                                                        <div id="table_div_stats"></div>
-                                                        <br><br>
-                                                        Konkurencja serwisu
-                                                        <div id="table_div_competitors"></div>
-                                                                        <br><br>
-                                                        Top 10 fraz
-                                                        <div id="table_div_KWs"></div>
-                                                        <div id="toolbar_div"></div>
-                                                        <p><a href=#>Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
+                                                          
+                                        <p><a href=#>Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
                                                     
-						</section>
-					</div>
+				</section>
+				</div>
 
 				</div>
 			</div>
