@@ -226,7 +226,7 @@ public class DataReports {
       public String[] GChartCompetitorsWebsiteStat(String website, String aggrQuery, String whereQuery){
         String table[] = new String[2];
         //staty
-        table[0] = ""; //count(KWs) lub sum()
+        table[0] = "data.addColumn('string', 'Miesiąc');\r\n";//count(KWs) lub sum()
         table[1] = ""; //dane do table 0 
  
         dbConnector db = new dbConnector();
@@ -257,7 +257,6 @@ public class DataReports {
             String headerCompact = myArrayData[myArrayData.length -1];
             String [] headerContent = headerCompact.split(",");
                 if (headerContent.length>1) {
-                table[0] = "data.addColumn('string', 'Miesiąc');\r\n";
                     for (int k=1; k<headerContent.length;k++)
                         table[0] = table[0] + "data.addColumn('number', '"+headerContent[k]+"');\r\n";
                 }
@@ -276,7 +275,11 @@ public class DataReports {
                 System.out.println( table[0] );
                 System.out.println( table[1] );
                         
+            } else {
+                 table[0] = table[0] + "data.addColumn('number', '"+website+"');\r\n";
+                  table[1] = table[1] + "['brak danych', 0],\r\n" ;
             }
+                
 
         } catch (SQLException e) {}
         
