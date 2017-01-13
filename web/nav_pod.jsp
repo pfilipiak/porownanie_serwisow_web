@@ -12,7 +12,7 @@
         <li><a href="#">Ruch organiczny</a></li>    
         <li><a href="#">Pozycja i wolumen</a></li>
         <li><a href="./Reports?r=competitor&website=${website}">Konkurencja</a></li>    
-        <li><a href="#">Trendy</a></li>     
+        <li><a href="./Reports?r=trends&website=${website}">Trendy</a></li>     
     </ul>
     </nav>
     

@@ -167,6 +167,79 @@ public class AppServlet extends HttpServlet {
         }
     }
     
+     //trends
+     protected void processRequestToTrendsStats(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+            String website = getValueQS("website",request.getQueryString());
+            DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
+            
+            //
+            String query = "Select (select recognize_text from d_bp_produkt where id = 1) as name, \n" +
+                "sum(month_1_current_ctr) as \"m-12\", sum(month_2_current_ctr) as \"m-11\", sum(month_3_current_ctr) as \"m-10\", sum(month_4_current_ctr) as \"m-9\", sum(month_5_current_ctr) as \"m-8\", sum(month_6_current_ctr) as \"m-7\", sum(month_7_current_ctr) as \"m-6\", sum(month_8_current_ctr) as \"m-5\", sum(month_9_current_ctr) as \"m-4\", sum(month_10_current_ctr) as \"m-3\", sum(month_11_current_ctr) as \"m-2\", sum(month_12_current_ctr) as \"m-1\" from bp_produkt_saturn\n" +
+                "union\n" +
+                "Select (select recognize_text from d_bp_produkt where id = 2) as name, \n" +
+                "sum(month_1_current_ctr) as \"m-12\", sum(month_2_current_ctr) as \"m-11\", sum(month_3_current_ctr) as \"m-10\", sum(month_4_current_ctr) as \"m-9\", sum(month_5_current_ctr) as \"m-8\", sum(month_6_current_ctr) as \"m-7\", sum(month_7_current_ctr) as \"m-6\", sum(month_8_current_ctr) as \"m-5\", sum(month_9_current_ctr) as \"m-4\", sum(month_10_current_ctr) as \"m-3\", sum(month_11_current_ctr) as \"m-2\", sum(month_12_current_ctr) as \"m-1\" from bp_produkt_euro\n" +
+                "union\n" +
+                "Select (select recognize_text from d_bp_produkt where id = 3) as name, \n" +
+                "sum(month_1_current_ctr) as \"m-12\", sum(month_2_current_ctr) as \"m-11\", sum(month_3_current_ctr) as \"m-10\", sum(month_4_current_ctr) as \"m-9\", sum(month_5_current_ctr) as \"m-8\", sum(month_6_current_ctr) as \"m-7\", sum(month_7_current_ctr) as \"m-6\", sum(month_8_current_ctr) as \"m-5\", sum(month_9_current_ctr) as \"m-4\", sum(month_10_current_ctr) as \"m-3\", sum(month_11_current_ctr) as \"m-2\", sum(month_12_current_ctr) as \"m-1\" from bp_produkt_media_expert\n" +
+                "union\n" +
+                "Select (select recognize_text from d_bp_produkt where id = 4) as name, \n" +
+                "sum(month_1_current_ctr) as \"m-12\", sum(month_2_current_ctr) as \"m-11\", sum(month_3_current_ctr) as \"m-10\", sum(month_4_current_ctr) as \"m-9\", sum(month_5_current_ctr) as \"m-8\", sum(month_6_current_ctr) as \"m-7\", sum(month_7_current_ctr) as \"m-6\", sum(month_8_current_ctr) as \"m-5\", sum(month_9_current_ctr) as \"m-4\", sum(month_10_current_ctr) as \"m-3\", sum(month_11_current_ctr) as \"m-2\", sum(month_12_current_ctr) as \"m-1\" from bp_produkt_media_markt\n" +
+                "union\n" +
+                "Select (select recognize_text from d_bp_produkt where id = 5) as name, \n" +
+                "sum(month_1_current_ctr) as \"m-12\", sum(month_2_current_ctr) as \"m-11\", sum(month_3_current_ctr) as \"m-10\", sum(month_4_current_ctr) as \"m-9\", sum(month_5_current_ctr) as \"m-8\", sum(month_6_current_ctr) as \"m-7\", sum(month_7_current_ctr) as \"m-6\", sum(month_8_current_ctr) as \"m-5\", sum(month_9_current_ctr) as \"m-4\", sum(month_10_current_ctr) as \"m-3\", sum(month_11_current_ctr) as \"m-2\", sum(month_12_current_ctr) as \"m-1\" from bp_produkt_morele\n" +
+                "union\n" +
+                "Select (select recognize_text from d_bp_produkt where id = 6) as name, \n" +
+                "sum(month_1_current_ctr) as \"m-12\", sum(month_2_current_ctr) as \"m-11\", sum(month_3_current_ctr) as \"m-10\", sum(month_4_current_ctr) as \"m-9\", sum(month_5_current_ctr) as \"m-8\", sum(month_6_current_ctr) as \"m-7\", sum(month_7_current_ctr) as \"m-6\", sum(month_8_current_ctr) as \"m-5\", sum(month_9_current_ctr) as \"m-4\", sum(month_10_current_ctr) as \"m-3\", sum(month_11_current_ctr) as \"m-2\", sum(month_12_current_ctr) as \"m-1\" from bp_produkt_oleole;\n" +
+                "";
+            //
+            
+            String[] tableCompKWs = apdata.GChartTrendsWebsiteStat(website, query);
+            String tableCompKWsHeader = tableCompKWs[0];
+            String tableCompKWsContent = tableCompKWs[1];
+          //
+          
+           query = "Select (select name from d_bp_produkt where id = 1) as name, \n" +
+                "sum(month_1_roznica) as \"m-12\", sum(month_2_roznica) as \"m-11\", sum(month_3_roznica) as \"m-10\", sum(month_4_roznica) as \"m-9\", sum(month_5_roznica) as \"m-8\", sum(month_6_roznica) as \"m-7\", sum(month_7_roznica) as \"m-6\", sum(month_8_roznica) as \"m-5\", sum(month_9_roznica) as \"m-4\", sum(month_10_roznica) as \"m-3\", sum(month_11_roznica) as \"m-2\", sum(month_12_roznica) as \"m-1\" from bp_produkt_saturn\n" +
+                "union\n" +
+                "Select (select name from d_bp_produkt where id = 2) as name, \n" +
+                "sum(month_1_roznica) as \"m-12\", sum(month_2_roznica) as \"m-11\", sum(month_3_roznica) as \"m-10\", sum(month_4_roznica) as \"m-9\", sum(month_5_roznica) as \"m-8\", sum(month_6_roznica) as \"m-7\", sum(month_7_roznica) as \"m-6\", sum(month_8_roznica) as \"m-5\", sum(month_9_roznica) as \"m-4\", sum(month_10_roznica) as \"m-3\", sum(month_11_roznica) as \"m-2\", sum(month_12_roznica) as \"m-1\" from bp_produkt_euro\n" +
+                "union\n" +
+                "Select (select name from d_bp_produkt where id = 3) as name, \n" +
+                "sum(month_1_roznica) as \"m-12\", sum(month_2_roznica) as \"m-11\", sum(month_3_roznica) as \"m-10\", sum(month_4_roznica) as \"m-9\", sum(month_5_roznica) as \"m-8\", sum(month_6_roznica) as \"m-7\", sum(month_7_roznica) as \"m-6\", sum(month_8_roznica) as \"m-5\", sum(month_9_roznica) as \"m-4\", sum(month_10_roznica) as \"m-3\", sum(month_11_roznica) as \"m-2\", sum(month_12_roznica) as \"m-1\" from bp_produkt_media_expert\n" +
+                "union\n" +
+                "Select (select name from d_bp_produkt where id = 4) as name, \n" +
+                "sum(month_1_roznica) as \"m-12\", sum(month_2_roznica) as \"m-11\", sum(month_3_roznica) as \"m-10\", sum(month_4_roznica) as \"m-9\", sum(month_5_roznica) as \"m-8\", sum(month_6_roznica) as \"m-7\", sum(month_7_roznica) as \"m-6\", sum(month_8_roznica) as \"m-5\", sum(month_9_roznica) as \"m-4\", sum(month_10_roznica) as \"m-3\", sum(month_11_roznica) as \"m-2\", sum(month_12_roznica) as \"m-1\" from bp_produkt_media_markt\n" +
+                "union\n" +
+                "Select (select name from d_bp_produkt where id = 5) as name, \n" +
+                "sum(month_1_roznica) as \"m-12\", sum(month_2_roznica) as \"m-11\", sum(month_3_roznica) as \"m-10\", sum(month_4_roznica) as \"m-9\", sum(month_5_roznica) as \"m-8\", sum(month_6_roznica) as \"m-7\", sum(month_7_roznica) as \"m-6\", sum(month_8_roznica) as \"m-5\", sum(month_9_roznica) as \"m-4\", sum(month_10_roznica) as \"m-3\", sum(month_11_roznica) as \"m-2\", sum(month_12_roznica) as \"m-1\" from bp_produkt_morele\n" +
+                "union\n" +
+                "Select (select name from d_bp_produkt where id = 6) as name, \n" +
+                "sum(month_1_roznica) as \"m-12\", sum(month_2_roznica) as \"m-11\", sum(month_3_roznica) as \"m-10\", sum(month_4_roznica) as \"m-9\", sum(month_5_roznica) as \"m-8\", sum(month_6_roznica) as \"m-7\", sum(month_7_roznica) as \"m-6\", sum(month_8_roznica) as \"m-5\", sum(month_9_roznica) as \"m-4\", sum(month_10_roznica) as \"m-3\", sum(month_11_roznica) as \"m-2\", sum(month_12_roznica) as \"m-1\" from bp_produkt_oleole;\n" +
+                "";
+            
+            
+            String[] tableCompVol = apdata.GChartTrendsWebsiteStat(website, query);
+            String tableCompVolHeader = tableCompVol[0];
+            String tableCompVolContent = tableCompVol[1];
+           //System.out.println(Arrays.toString(table));
+            
+            request.setAttribute("website", website + " trends"); // This will be available as ${message}
+            request.setAttribute("tableCompKWsHeader", tableCompKWsHeader); //
+            request.setAttribute("tableCompKWsContent", tableCompKWsContent); //
+
+            request.setAttribute("tableCompVolHeader", tableCompVolHeader); //
+            request.setAttribute("tableCompVolContent", tableCompVolContent); //
+            
+            request.getRequestDispatcher("/reportTrends.jsp").forward(request, response);
+        }
+    }
+     
+     //end trends
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -190,7 +263,10 @@ public class AppServlet extends HttpServlet {
         }  
         else if (qs.contains("r=competitor")) {
             processRequestToCompetitorStats(request, response);
-            
+        } 
+        else if (qs.contains("r=trends")) {
+            processRequestToTrendsStats(request, response);
+                        
         } else {
             processServletRequest(request, response);
         }

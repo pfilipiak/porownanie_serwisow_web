@@ -236,8 +236,6 @@ public class DataReports {
         // queryRes = db.... metoda do stat
             ArrayList<String> resList = new ArrayList<>();
             String[] myArrayData = new String[13];
-            String[] myArrayVol = new String[13];
-            //resList.add("spier ");
             queryRes = db.getWebsiteCompetitorsReport(resList, website, aggrQuery, whereQuery);
             
             if (queryRes == true)
@@ -277,7 +275,7 @@ public class DataReports {
                         
             } else {
                  table[0] = table[0] + "data.addColumn('number', '"+website+"');\r\n";
-                  table[1] = table[1] + "['brak danych', 0],\r\n" ;
+                  table[1] = table[1] + "['brak danych', 0]\r\n" ;
             }
                 
 
@@ -287,6 +285,72 @@ public class DataReports {
     }      
       
       //end Competitors
+      
+      //trends
+    public String[] GChartTrendsWebsiteStat(String website,String query){
+        String table[] = new String[2];
+        //staty
+        table[0] = "data.addColumn('string', 'Nadchodzący miesiąc');\r\n";//count(KWs) lub sum()
+        table[1] = ""; //dane do table 0 
+ 
+        dbConnector db = new dbConnector();
+        Boolean queryRes = false; 
+        try {
+        //------------Staty------------------------//
+        // queryRes = db.... metoda do stat
+            ArrayList<String> resList = new ArrayList<>();
+            String[] myArrayData = new String[13];
+            queryRes = db.getWebsiteTrendsReport(resList, website, query);
+            
+            if (queryRes == true)
+            {
+                myArrayData = resList.toArray(new String[0]);
+                
+                //java.util.Arrays.sort(myArrayData);
+            }
+            
+            resList.clear(); 
+            //print report
+            System.out.println("Liczby zwiazane z trendem (" + myArrayData.length+ ")");
+            if (queryRes == true && myArrayData.length>1) {
+                String [] nextMths = new String[12];
+             //naglowki i dane tabelaryczne (website przed pierwszym przecinkiem
+                for (int m = 0; m < nextMths.length; m++)
+                nextMths[m] = "'za " + (m+1) + " mc'";
+                
+                for (int k=0; k<myArrayData.length; k++) 
+                {
+                 String[] trends = myArrayData[k].split("\t");
+                 table[0] = table[0] +  "data.addColumn('number', '"+ trends[0] +"');\r\n";
+                  for (int m = 0; m < nextMths.length; m++)
+                      nextMths[m] = nextMths[m] + ", "+ trends[m+1];
+                 //table[1] = table[1] + "["+myArrayData[k]+"],\r\n" ;
+                }
+                
+                for (int m = 0; m < nextMths.length; m++)
+                {
+                 table[1] = table[1] + "["+ nextMths[m]+ "],\r\n";
+                }     
+                     
+                table[1] = table[1].trim();
+                table[1] = table[1].substring(0, table[1].length()-1); 
+                
+                System.err.println("wyniki table");
+                System.out.println( table[0] );
+                System.out.println( table[1] );
+                        
+            } else {
+                 table[0] = table[0] + "data.addColumn('number', '"+website+"');\r\n";
+                 table[1] = table[1] + "['brak danych', 0]\r\n" ;
+            }
+                
+
+        } catch (SQLException e) {}
+        
+        return table;
+    }        
+      
+      //end trends
 
     public Boolean getIsLive() {
         return IsLive;
