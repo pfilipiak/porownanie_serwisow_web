@@ -137,10 +137,14 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String pos = getValueQS("pos",request.getQueryString());
             String vol = getValueQS("vol",request.getQueryString());
+            String sign = "<=";
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
             
             if (pos != "") pos = " AND position <=" + pos;
-            if (vol != "") vol = " AND search_volume <=" + vol;
+            if (vol != "") {
+                    if (vol.startsWith("f")) {sign = ">="; vol = vol.substring(1);}
+                    vol = " AND search_volume " + sign + vol;
+            }
             
             
             String[] tableCompKWs = apdata.GChartCompetitorsWebsiteStat(website, "count(*)", "where brand_fraze='false' "+ pos + vol);
