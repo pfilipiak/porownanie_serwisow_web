@@ -142,7 +142,7 @@ public class AppServlet extends HttpServlet {
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
             
             if (pos != "") {
-                if (pos.startsWith("f")) {signPos = ">="; pos = vol.substring(1);}
+                if (pos.startsWith("f")) {signPos = ">="; pos = pos.substring(1);}
                 pos = " AND position" + signPos + pos;
             } 
             
