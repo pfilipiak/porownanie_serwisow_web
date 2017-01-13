@@ -214,7 +214,12 @@
 
 	<!-- Header -->
         <%@include file="header.jsp" %>           
-        
+        <% 
+            String p="100";
+            if (request.getParameter("pos") != null && request.getParameter("pos").length()>0){
+                p = request.getParameter("pos");
+            }
+        %>
 	<!-- Main -->
 		<div id="main">
 			<div class="container">
@@ -240,10 +245,10 @@
                                                             <input type="hidden" name="website" value="${website}"/>  
                                                             <ul class="donate-now">                                                                   
                                                                         <li>
-                                                                            <input type="radio" id="pozKonkur_wszystko" value="5" name="pos" 
+                                                                            <input type="radio" id="pozKonkur_wszystko" value="100" name="pos" 
                                                                                    <%
-                                                                                       String p = request.getParameter("pos");
-                                                                                        if (p.contains("5") ) {
+                                                                                     
+                                                                                        if (p.contains("100") ) {
                                                                                             out.print("checked");
                                                                                         }
                                                                                         else {out.print("");}
@@ -254,8 +259,8 @@
                                                                         <li>
                                                                                 <input type="radio" id="pozKonkur_top1" value="1" name="pos" 
                                                                                    <%
-                                                                                       p = request.getParameter("pos");
-                                                                                        if (p.contains("1") ) {
+                                                                                        p = request.getParameter("pos");
+                                                                                        if (p.equals("1") ) {
                                                                                             out.print("checked");
                                                                                         }
                                                                                         else {out.print("");}
@@ -266,7 +271,7 @@
                                                                         <li>
                                                                                 <input type="radio" id="pozKonkur_top2-3" value="2" name="pos" 
                                                                                        <%
-                                                                                       p = request.getParameter("pos");
+                                                                                       
                                                                                         if (p.contains("2") ) {
                                                                                             out.print("checked");
                                                                                         }
@@ -278,7 +283,7 @@
                                                                         <li>
                                                                                 <input type="radio" id="pozKonkur_top4-10" value="3" name="pos" 
                                                                                        <%
-                                                                                       p = request.getParameter("pos");
+                                                                                      
                                                                                         if (p.contains("3") ) {
                                                                                             out.print("checked");
                                                                                         }
@@ -290,7 +295,7 @@
                                                                         <li>
                                                                                 <input type="radio" id="pozKonkur_10+" value="4" name="pos" 
                                                                                        <%
-                                                                                       p = request.getParameter("pos");
+                                                                                     
                                                                                         if (p.contains("4") ) {
                                                                                             out.print("checked");
                                                                                         }

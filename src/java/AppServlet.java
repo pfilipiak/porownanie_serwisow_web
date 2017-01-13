@@ -137,13 +137,18 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             String pos = getValueQS("pos",request.getQueryString());
             String vol = getValueQS("vol",request.getQueryString());
-            String sign = "<=";
+            String signVol = "<=";
+            String signPos = "<=";
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
             
-            if (pos != "") pos = " AND position <=" + pos;
+            if (pos != "") {
+                if (pos.startsWith("f")) {signPos = ">="; pos = vol.substring(1);}
+                pos = " AND position" + signPos + pos;
+            } 
+            
             if (vol != "") {
-                    if (vol.startsWith("f")) {sign = ">="; vol = vol.substring(1);}
-                    vol = " AND search_volume " + sign + vol;
+                if (vol.startsWith("f")) {signVol = ">="; vol = vol.substring(1);}
+                vol = " AND search_volume " + signVol + vol;
             }
             
             
@@ -156,7 +161,7 @@ public class AppServlet extends HttpServlet {
             String tableCompVolContent = tableCompVol[1];
            //System.out.println(Arrays.toString(table));
             
-            request.setAttribute("website", website + "hahah"); // This will be available as ${message}
+            request.setAttribute("website", website); // This will be available as ${message}
             request.setAttribute("tableCompKWsHeader", tableCompKWsHeader); //
             request.setAttribute("tableCompKWsContent", tableCompKWsContent); //
 
@@ -228,7 +233,7 @@ public class AppServlet extends HttpServlet {
             String tableCompVolContent = tableCompVol[1];
            //System.out.println(Arrays.toString(table));
             
-            request.setAttribute("website", website + " trends"); // This will be available as ${message}
+            request.setAttribute("website", website); // This will be available as ${message}
             request.setAttribute("tableCompKWsHeader", tableCompKWsHeader); //
             request.setAttribute("tableCompKWsContent", tableCompKWsContent); //
 
