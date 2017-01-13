@@ -135,13 +135,19 @@ public class AppServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             String website = getValueQS("website",request.getQueryString());
+            String pos = getValueQS("pos",request.getQueryString());
+            String vol = getValueQS("vol",request.getQueryString());
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
-   
-            String[] tableCompKWs = apdata.GChartCompetitorsWebsiteStat(website, "count(*)", "where position < 11");
+            
+            if (pos != "") pos = " AND position <=" + pos;
+            if (vol != "") vol = " AND search_volume <=" + vol;
+            
+            
+            String[] tableCompKWs = apdata.GChartCompetitorsWebsiteStat(website, "count(*)", "where brand_fraze='false' "+ pos + vol);
             String tableCompKWsHeader = tableCompKWs[0];
             String tableCompKWsContent = tableCompKWs[1];
  
-            String[] tableCompVol = apdata.GChartCompetitorsWebsiteStat(website, "sum(search_volume)", "where position < 11");
+            String[] tableCompVol = apdata.GChartCompetitorsWebsiteStat(website, "sum(search_volume)", "where brand_fraze='false' "+ pos +  vol);
             String tableCompVolHeader = tableCompVol[0];
             String tableCompVolContent = tableCompVol[1];
            //System.out.println(Arrays.toString(table));

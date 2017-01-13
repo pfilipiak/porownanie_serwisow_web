@@ -249,6 +249,7 @@
                                             <div id="konkur_poz">
                                                     <form action="">
                                                             <ul class="donate-now">
+                                                                
                                                                     <li>
                                                                             <input type="radio" id="pozKonkur_wszystko" value="5" name="pozycjeKonkur" checked="checked" />
                                                                             <label for="pozKonkur_wszystko">Wszystkie pozycje</label>
@@ -282,6 +283,7 @@
                                                       <input type="radio" name="wolumen" value="Wszystko" checked> Dowolny wolumen
                                                       <input type="radio" name="wolumen" value="do5"> Wolumen do 5 tys.
                                                       <input type="radio" name="wolumen" value="od5"> Wolumen od 5 tys.
+                                                       
                                                     </form>
                                             </div>
                                     </td>
