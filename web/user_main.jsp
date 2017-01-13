@@ -42,9 +42,12 @@
                                                             <h2>Strona użytkownika <b><shiro:user><c:out value="${account.givenName}"/></shiro:user></b>!</h2>
                                                         </header>
                                                             <a href="<c:url value="/logout"/>">Wyloguj się</a>
-                                                
-                                                            <p>Strona użytkownika <b><shiro:user><c:out value="${account.givenLastName}"/></b></shiro:user></p>
-                                                    
+                                                            <div class="form-group">
+                                                                                <input class="form-control" id="log_username" placeholder="Nazwa użytkownika lub Email" name="username" type="text">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <br><input class="form-control" id="log_password" placeholder="Hasło" name="password" type="password" value="">
+                                                                            </div>
                                                     
                                                     
                                                     

@@ -61,6 +61,11 @@
 			  'title': 'Rozkład liczby pozycji',
 			  width: 900,
 			  height: 400,
+                          animation:{
+                            duration: 1000,
+                            easing: 'out',
+                          },
+                          vAxis: {minValue:0, maxValue:1000}
 			}
 		  });
 
@@ -75,9 +80,10 @@
 				allowTyping: false,
 				allowMultiple: true,
 				allowNone: false
-				, selectedValuesLayout: 'below'
+				, selectedValuesLayout: ''
 			  }
 			},
+                        
 			state: initState
 		  });
 				
@@ -142,9 +148,15 @@
 			containerId: 'chartVolSum_div',
 			dataTable: data,
 			options: {
-			  'title': 'Rozkład sumy liczby wyszukiwań',
+			  'title': '',
 			  width: 900,
 			  height: 400,
+                          animation:{
+                            duration: 1000,
+                            easing: 'out',
+                          },
+                          vAxis: {minValue:0, maxValue:1000},
+                          'legend': 'right'
 			}
 		  });
 
@@ -159,7 +171,7 @@
 				allowTyping: false,
 				allowMultiple: true,
 				allowNone: false, 
-                                selectedValuesLayout: 'below'
+                                selectedValuesLayout: ''
 			  }
 			},
 			state: initState
@@ -217,9 +229,103 @@
                                         <br>
 					<header>
                                             <h2>Porównanie konkurencji <b>${website}</b></h2>
+                                            
 					</header>
                                                     
                                         <table>
+                                            <tr><td>
+                                                <div id="konkur_poz">
+                                                        <form action="./Reports?r=competitor&website=${website}" method="get">
+                                                            <input type="hidden" name="r" value="competitor"/>  
+                                                            <input type="hidden" name="website" value="${website}"/>  
+                                                            <ul class="donate-now">                                                                   
+                                                                        <li>
+                                                                            <input type="radio" id="pozKonkur_wszystko" value="5" name="pos" 
+                                                                                   <%
+                                                                                       String p = request.getParameter("pos");
+                                                                                        if (p.contains("5") ) {
+                                                                                            out.print("checked");
+                                                                                        }
+                                                                                        else {out.print("");}
+                                                                                    %>
+                                                                                   />
+                                                                                <label for="pozKonkur_wszystko">Wszystkie pozycje</label>
+                                                                        </li>
+                                                                        <li>
+                                                                                <input type="radio" id="pozKonkur_top1" value="1" name="pos" 
+                                                                                   <%
+                                                                                       p = request.getParameter("pos");
+                                                                                        if (p.contains("1") ) {
+                                                                                            out.print("checked");
+                                                                                        }
+                                                                                        else {out.print("");}
+                                                                                    %>
+                                                                                   />
+                                                                                <label for="pozKonkur_top1">Pozycja 1</label>
+                                                                        </li>
+                                                                        <li>
+                                                                                <input type="radio" id="pozKonkur_top2-3" value="2" name="pos" 
+                                                                                       <%
+                                                                                       p = request.getParameter("pos");
+                                                                                        if (p.contains("2") ) {
+                                                                                            out.print("checked");
+                                                                                        }
+                                                                                        else {out.print("");}
+                                                                                    %>
+                                                                                   />
+                                                                                <label for="pozKonkur_top2">Pozycje 2-3</label>
+                                                                        </li>
+                                                                        <li>
+                                                                                <input type="radio" id="pozKonkur_top4-10" value="3" name="pos" 
+                                                                                       <%
+                                                                                       p = request.getParameter("pos");
+                                                                                        if (p.contains("3") ) {
+                                                                                            out.print("checked");
+                                                                                        }
+                                                                                        else {out.print("");}
+                                                                                    %>
+                                                                                   />
+                                                                                <label for="pozKonkur_top4-10">Pozycja 4-10</label>
+                                                                        </li>
+                                                                        <li>
+                                                                                <input type="radio" id="pozKonkur_10+" value="4" name="pos" 
+                                                                                       <%
+                                                                                       p = request.getParameter("pos");
+                                                                                        if (p.contains("4") ) {
+                                                                                            out.print("checked");
+                                                                                        }
+                                                                                        else {out.print("");}
+                                                                                    %>
+                                                                                   />
+                                                                                <label for="pozKonkur_10+">Pozycja 10+</label>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input class="button" id="poz_button" type="submit" value="Zmień" />
+                                                                        </li>
+                                                                        </ul>
+                                                        </form>
+                                                </div>
+                                                </td>
+                                            </tr>
+
+
+                                        <tr><td>
+                                                <div id="konkur_wol">
+                                                        <form class="wolumenKonkur" action="">
+                                                          <input type="radio" name="wolumen" value="Wszystko" checked> Dowolny wolumen
+                                                          <input type="radio" name="wolumen" value="do5"> Wolumen do 5 tys.
+                                                          <input type="radio" name="wolumen" value="od5"> Wolumen od 5 tys.
+
+                                                        </form>
+                                                </div>
+                                        </td>
+                                        </tr>    
+                                        <tr>
+                                            <td>
+                                                <br>
+                                            </td>                                                
+                                        </tr>
+                                            
                                         <tr><td>
                                             <header>
                                                 <h3>Rozkład liczby słów kluczowych</h3>
@@ -245,49 +351,6 @@
                                                 </header>
                                             </td>
                                         </tr>
-                                        <tr><td>
-                                            <div id="konkur_poz">
-                                                    <form action="">
-                                                            <ul class="donate-now">
-                                                                
-                                                                    <li>
-                                                                            <input type="radio" id="pozKonkur_wszystko" value="5" name="pozycjeKonkur" checked="checked" />
-                                                                            <label for="pozKonkur_wszystko">Wszystkie pozycje</label>
-                                                                    </li>
-                                                                    <li>
-                                                                            <input type="radio" id="pozKonkur_top1" value="1" name="pozycjeKonkur" />
-                                                                            <label for="pozKonkur_top1">Pozycja 1</label>
-                                                                    </li>
-                                                                    <li>
-                                                                            <input type="radio" id="pozKonkur_top2-3" value="2" name="pozycjeKonkur" />
-                                                                            <label for="pozKonkur_top2">Pozycje 2-3</label>
-                                                                    </li>
-                                                                    <li>
-                                                                            <input type="radio" id="pozKonkur_top4-10" value="3" name="pozycjeKonkur" />
-                                                                            <label for="pozKonkur_top4-10">Pozycja 4-10</label>
-                                                                    </li>
-                                                                    <li>
-                                                                            <input type="radio" id="pozKonkur_10+" value="4" name="pozycjeKonkur" />
-                                                                            <label for="pozKonkur_10+">Pozycja 10+</label>
-                                                                    </li>
-                                                                    </ul>
-                                                    </form>
-                                            </div>
-                                            </td>
-                                        </tr>
-
-
-                                    <tr><td>
-                                            <div id="konkur_wol">
-                                                    <form class="wolumenKonkur" action="">
-                                                      <input type="radio" name="wolumen" value="Wszystko" checked> Dowolny wolumen
-                                                      <input type="radio" name="wolumen" value="do5"> Wolumen do 5 tys.
-                                                      <input type="radio" name="wolumen" value="od5"> Wolumen od 5 tys.
-                                                       
-                                                    </form>
-                                            </div>
-                                    </td>
-                                    </tr>
                                         
                                     <tr>
                                         <td>

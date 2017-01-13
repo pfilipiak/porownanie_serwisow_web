@@ -39,6 +39,7 @@
 					<header>
 						<h2>Logowanie</h2>
                                                 <br>
+                                        </header>
                                                 <!--
                                                 <div id="log_panel">
                                                     <form name="logowanie" action="" method="POST" accept-charset="UTF-8" role="form">
@@ -79,12 +80,13 @@
                                                             </fieldset>
                                                         </form>
                                                     </div>
-                                                </div>
+                                                
                                                 </section>
+                                </section>
+                        </div>
+                </div>
                                                 <!-- koniec formularza -->
-				</section>
-			</div>
-		</div>
+				
 	<!-- /Main -->
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
             <script src="https://code.jquery.com/jquery.js"></script>
