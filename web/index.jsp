@@ -49,19 +49,19 @@
 						<span class="pennant"><span class="fa fa-briefcase"></span></span>
 						<h3>Rozbudowane raporty</h3>
 						<p>Zapoznaj się z raportami dotyczącymi Twojej witryny, zamawiaj subskrypcję, wykorzystaj rozbudowane diagramy i zestawienia, analizuj trendy. Zmieniaj się z nami.</p>
-						<a href="#" class="button button-style1">Czytaj więcej</a>
+						<!-- <a href="#" class="button button-style1">Czytaj więcej</a> -->
 					</section>
 					<section class="4u">
 						<span class="pennant"><span class="fa fa-lock"></span></span>
 						<h3>Bezpieczeństwo</h3>
 						<p>Szczegółowe dane, analiza konkurencji oraz trendy na przyszłość dostępne tylko dla zalogowanych użytkowników. Wszystkie dane są odpowiednio zabezpieczone.</p>
-						<a href="#" class="button button-style1">Czytaj więcej</a>
+						<!-- <a href="#" class="button button-style1">Czytaj więcej</a> -->
 					</section>
 					<section class="4u">
 						<span class="pennant"><span class="fa fa-globe"></span></span>
 						<h3>Ogólnoświatowy zasięg</h3>
 						<p>Analizuj konkurencję krajową i zagraniczną, buduj międzynarodową strategię w oparciu o zebrane przez nas informacje. Bądź liderem swojej branży!</p>
-						<a href="#" class="button button-style1">Czytaj więcej</a>
+						<!-- <a href="#" class="button button-style1">Czytaj więcej</a> -->
 					</section>
 
 				</div>

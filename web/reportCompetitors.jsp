@@ -138,7 +138,7 @@
 		  // initState.selectedValues.push(data.getColumnLabel(4));
 
 		  var chart = new google.visualization.ChartWrapper({
-			chartType: 'Bar',
+			chartType: 'AreaChart',
 			containerId: 'chartVolSum_div',
 			dataTable: data,
 			options: {
@@ -158,8 +158,8 @@
 				label: '',
 				allowTyping: false,
 				allowMultiple: true,
-				allowNone: false
-				, selectedValuesLayout: 'below'
+				allowNone: false, 
+                                selectedValuesLayout: 'below'
 			  }
 			},
 			state: initState
@@ -221,7 +221,9 @@
                                                     
                                         <table>
                                         <tr><td>
-                                            <h3>Rozkład liczby słów kluczowych</h3>
+                                            <header>
+                                                <h3>Rozkład liczby słów kluczowych</h3>
+                                            </header>
                                             <div id="colFilterCountKWs_div"></div>
                                             <br>
                                         </td>
@@ -232,7 +234,61 @@
                                         </td>
                                         </tr>
                                         <tr><td>
-                                                <h3>Rozkład sumy wyszukiwań słów kluczowych</h3>
+                                                <p><a href=#>Drukuj raport</a> lub pobierz w postaci <a href="#">PDF</a> lub <a href="#">CSV</a>.</p>
+                                                <br>
+                                        </td>
+                                        </tr>
+                                        
+                                        <tr><td>
+                                                <header>
+                                                    <h3>Rozkład sumy wyszukiwań słów kluczowych</h3>
+                                                </header>
+                                            </td>
+                                        </tr>
+                                        <tr><td>
+                                            <div id="konkur_poz">
+                                                    <form action="">
+                                                            <ul class="donate-now">
+                                                                    <li>
+                                                                            <input type="radio" id="pozKonkur_wszystko" value="5" name="pozycjeKonkur" checked="checked" />
+                                                                            <label for="pozKonkur_wszystko">Wszystkie pozycje</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="radio" id="pozKonkur_top1" value="1" name="pozycjeKonkur" />
+                                                                            <label for="pozKonkur_top1">Pozycja 1</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="radio" id="pozKonkur_top2-3" value="2" name="pozycjeKonkur" />
+                                                                            <label for="pozKonkur_top2">Pozycje 2-3</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="radio" id="pozKonkur_top4-10" value="3" name="pozycjeKonkur" />
+                                                                            <label for="pozKonkur_top4-10">Pozycja 4-10</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="radio" id="pozKonkur_10+" value="4" name="pozycjeKonkur" />
+                                                                            <label for="pozKonkur_10+">Pozycja 10+</label>
+                                                                    </li>
+                                                                    </ul>
+                                                    </form>
+                                            </div>
+                                            </td>
+                                        </tr>
+
+
+                                    <tr><td>
+                                            <div id="konkur_wol">
+                                                    <form class="wolumenKonkur" action="">
+                                                      <input type="radio" name="wolumen" value="Wszystko" checked> Dowolny wolumen
+                                                      <input type="radio" name="wolumen" value="do5"> Wolumen do 5 tys.
+                                                      <input type="radio" name="wolumen" value="od5"> Wolumen od 5 tys.
+                                                    </form>
+                                            </div>
+                                    </td>
+                                    </tr>
+                                        
+                                    <tr>
+                                        <td>
                                                 <div id="colFilterSumVol_div"></div>
                                                 <br>
                                         </td>
@@ -251,8 +307,7 @@
 
 				</div>
 			</div>
-		</div>
-	<!-- /Main -->
+		<!-- /Main -->
 
 	<%@include file="footer.jsp" %>                
         

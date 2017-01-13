@@ -16,7 +16,7 @@
                         <section class="10u">
                                 <ul class="default">
                                         <shiro:authenticated>
-                                            <li><a href="#">Konto użytkownika <shiro:user><c:out value="${account.givenName}"/></shiro:user></a></li>
+                                            <li><a href="user_main.jsp">Konto użytkownika <shiro:user><c:out value="${account.givenName}"/></shiro:user></a></li>
                                             <li><a href="#">Klucz dostępu</a></li>
                                             <li><a href="#">Obserwowane domeny</a></li>
                                             <li><a href="#">Zdefiniowana konkurencja</a></li>
@@ -32,6 +32,7 @@
                                                                                 </div>
         </section>
         <section>
+                <shiro:authenticated>
                 <header>
                         <h2>Dane z monitoringu</h2>
                 </header>
@@ -45,6 +46,7 @@
                                 <p><a href="#">Serwis MediaExpert.pl odnotował znaczny wzrost ruchu organicznego. Kliknij, aby przejść do raportu.</a></p>
                         </li>
                 </ul>
+                </shiro:authenticated>
         </section>
 </div>
 

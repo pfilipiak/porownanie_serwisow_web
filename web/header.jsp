@@ -14,13 +14,13 @@
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li class="active"><a href="index.jsp">Strona główna</a></li>
-                                                <li><a href="analizaSerwisu.jsp">Analiza serwisu</a></li>
-                                         <!--   <li><a href="serviceToService.jsp">Serwis do serwisu</a></li>    -->
+						<li class="active"><a href="./index.jsp">Strona główna</a></li>
+                                                <li><a href="./analizaSerwisu.jsp">Analiza serwisu</a></li>
+                                         <!--   <li><a href="./serviceToService.jsp">Serwis do serwisu</a></li>    -->
                                                 <li><a href="#">Trendy</a></li>
-                                                <li><a href="contact.jsp">Kontakt</a></li>
+                                                <li><a href="./contact.jsp">Kontakt</a></li>
                                                 <shiro:authenticated>
-                                                    <li><a href="account/"><shiro:user>
+                                                    <li><a href="./account/"><shiro:user>
         <%
             request.setAttribute("account", org.apache.shiro.SecurityUtils.getSubject().getPrincipals().oneByType(java.util.Map.class));
         %>
@@ -28,7 +28,7 @@
                                                     <li><a href="<c:url value="/logout"/>">Wyloguj się</a></li>
                                                 
                                                 </shiro:authenticated>
-                                                <shiro:notAuthenticated><li><a href="loginPage.jsp">Logowanie</a></li></shiro:notAuthenticated>
+                                                <shiro:notAuthenticated><li><a href="./loginPage.jsp">Logowanie</a></li></shiro:notAuthenticated>
                                             
                                                 <li>
                                                     <form action="Reports?r=1" method="get">
@@ -43,7 +43,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<h1><a href="index.jsp">Porównywarka serwisów</a></h1>
+					<h1><a href="./index.jsp">Porównywarka serwisów</a></h1>
 					<span class="tag">JEDYNE TAKIE NARZĘDZIE SEO NA RYNKU</span>
 				</div>
 			</div>

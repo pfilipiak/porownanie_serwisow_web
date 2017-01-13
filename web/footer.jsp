@@ -20,7 +20,7 @@
 				<section>
 					<header>
 						<h2>Bądźmy w kontakcie</h2>
-                                                <span class="byline">Jeśli masz pytania, <a href="contact.jsp" class="contact"><span>skontaktuj się z nami</span></a> lub odwiedź nas na portalach społecznościowych.</span>
+                                                <span class="byline">Jeśli masz pytania, <a href="./contact.jsp" class="contact"><span>skontaktuj się z nami</span></a> lub odwiedź nas na portalach społecznościowych.</span>
 					</header>
 					<ul class="contact">
 						<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
