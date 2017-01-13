@@ -251,7 +251,7 @@ public class DataReports {
                             
             //print report
             System.out.println("Liczby zwiazane z konkurencja");
-            if (myArrayData.length>1) {
+            if (queryRes == true && myArrayData.length>1) {
                 
              //nagłowki do GChart   
             String headerCompact = myArrayData[myArrayData.length -1];
