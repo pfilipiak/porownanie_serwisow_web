@@ -979,6 +979,12 @@
                             color: white;
                             
                         }
+                        
+                        #nav_pod li a #active, .dropdown #active .dropbtn {
+                            background-color: darkgreen;
+                            color: white;
+                            
+                        }
 
                         #nav_pod li.dropdown {
                             display: inline-block;
