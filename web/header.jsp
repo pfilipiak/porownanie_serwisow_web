@@ -20,7 +20,7 @@
                                                 <li><a href="./analizaTrendow.jsp">Trendy</a></li>
                                                 <li><a href="./contact.jsp">Kontakt</a></li>
                                                 <shiro:authenticated>
-                                                    <li><a href="./account/"><shiro:user>
+                                                    <li><a href="./user_main.jsp"><shiro:user>
         <%
             request.setAttribute("account", org.apache.shiro.SecurityUtils.getSubject().getPrincipals().oneByType(java.util.Map.class));
         %>

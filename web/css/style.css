@@ -1417,3 +1417,57 @@
     font-weight: bold;
     padding: 0;
 }
+
+
+
+#user_panel 
+{
+    width: 80%;
+    margin: 0 auto; 
+    padding: 15px 0 0;
+    background: #fff;
+    border: 1px solid silver;
+    font: 16px calibri;
+    letter-spacing: -1px;
+    -webkit-box-shadow: 0 0 2px silver; 
+    -moz-box-shadow: 0 0 2px silver; 
+    box-shadow: 0 0 2px silver;
+}
+
+#user_panel form 
+{
+    margin: 0;
+}
+
+#user_panel label 
+{
+    display: block;
+    width: 260px;
+    padding: 10px 20px;
+    color: #696969;
+    font-size: 16px;
+    text-shadow: 0 0 1px silver;
+}
+
+#user_username, #user_name, #user_lastname, #user_email, #user_password_alt, #user_password_new, #user_password_renew
+{
+    display: block;
+    width: 100%; 
+    margin: 0 auto;
+    padding: 10px 5px;
+    border: 1px solid silver;
+    outline: 5px solid #ebebeb;
+    font-size: 18px;
+}
+#user_username:hover, #user_name:hover, #user_lastname:hover, #user_email:hover:hover, #user_password_alt:hover, #user_password_new:hover, #user_password_renew:hover
+{
+    outline: 5px solid #70AA7E;
+}
+
+
+#user_button {
+    position: relative;
+    width: 100%; 
+    padding: 10px 5px;
+    
+}
