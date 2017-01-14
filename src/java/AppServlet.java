@@ -140,7 +140,7 @@ public class AppServlet extends HttpServlet {
             String signVol = "<=";
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
             int pozycja = Integer.parseInt(pos);
-            int wolumen = Integer.parseInt(vol);
+            //int wolumen = Integer.parseInt(vol);
             
             if (pos != "") {
                 if (pozycja == 1) {pos = "AND position = 1";}
