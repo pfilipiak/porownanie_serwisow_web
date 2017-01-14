@@ -215,14 +215,14 @@
 	<!-- Header -->
         <%@include file="header.jsp" %>           
         <% 
-            String p="100";
+            int p=0;
             if (request.getParameter("pos") != null && request.getParameter("pos").length()>0){
-                p = request.getParameter("pos");//Integer.parseInt(request.getParameter("pos"));
+                p = Integer.parseInt(request.getParameter("pos"));
             }
             
-            String v="f1";
+            int v=0;
             if (request.getParameter("vol") != null && request.getParameter("vol").length()>0){
-                v = request.getParameter("vol");//Integer.parseInt(request.getParameter("vol"));
+                v = Integer.parseInt(request.getParameter("vol"));
             }
         %>
 	<!-- Main -->
@@ -250,9 +250,9 @@
                                                             <input type="hidden" name="website" value="${website}"/>  
                                                             <ul class="donate-now">                                                                   
                                                                         <li>
-                                                                            <input type="radio" id="pozKonkur_wszystko" value="100" name="pos" 
+                                                                            <input type="radio" id="pozKonkur_wszystko" value="0" name="pos" 
                                                                                    <%
-                                                                                      if (p.contains("100")) {
+                                                                                      if (p<1) {
                                                                                             out.print("checked");
                                                                                         }
                                                                                         else {out.print("");}
@@ -263,7 +263,7 @@
                                                                         <li>
                                                                                 <input type="radio" id="pozKonkur_top1" value="1" name="pos" 
                                                                                    <%
-                                                                                        if (p == "1") {
+                                                                                        if (p==1) {
                                                                                             out.print("checked");
                                                                                         }
                                                                                         else {out.print("");}
@@ -274,7 +274,7 @@
                                                                         <li>
                                                                                 <input type="radio" id="pozKonkur_top2-3" value="3" name="pos" 
                                                                                        <%
-                                                                                       if (p == "3" ) {
+                                                                                       if (p>1 && p<4 ) {
                                                                                             out.print("checked");
                                                                                         }
                                                                                         else {out.print("");}
@@ -286,7 +286,7 @@
                                                                                 <input type="radio" id="pozKonkur_top4-10" value="10" name="pos" 
                                                                                        <%
                                                                                       
-                                                                                        if (p == "10") {
+                                                                                        if (p>3 && p<11) {
                                                                                             out.print("checked");
                                                                                         }
                                                                                         else {out.print("");}
@@ -295,10 +295,10 @@
                                                                                 <label for="pozKonkur_top4-10">Pozycja 4-10</label>
                                                                         </li>
                                                                         <li>
-                                                                                <input type="radio" id="pozKonkur_10+" value="f11" name="pos" 
+                                                                                <input type="radio" id="pozKonkur_10+" value="100" name="pos" 
                                                                                        <%
                                                                                      
-                                                                                        if (p == "11") {
+                                                                                        if (p>10) {
                                                                                             out.print("checked");
                                                                                         }
                                                                                         else {out.print("");}
@@ -321,9 +321,9 @@
                                                 <div id="konkur_wol">
                                                         <form class="wolumenKonkur" action=""> 
                                                                                            -->
-                                                          <input type="radio" name="vol" value="f1" 
+                                                          <input type="radio" name="vol" value="0" 
                                                                  <%
-                                                                    if (v == "f1") {
+                                                                    if (v<1) {
                                                                         out.print("checked");
                                                                     }
                                                                     else {out.print("");}
@@ -331,15 +331,15 @@
                                                                /> Dowolny wolumen
                                                           <input type="radio" name="vol" value="5000"
                                                                  <%
-                                                                    if (v == "5000") {
+                                                                    if (v>0 && v<5001) {
                                                                         out.print("checked");
                                                                     }
                                                                     else {out.print("");}
                                                                 %>
                                                                />Wolumen do 5 tys.
-                                                          <input type="radio" name="vol" value="f5001"
+                                                          <input type="radio" name="vol" value="5001"
                                                                  <%
-                                                                    if (v == "f5001") {
+                                                                    if (v>5000) {
                                                                         out.print("checked");
                                                                     }
                                                                     else {out.print("");}
