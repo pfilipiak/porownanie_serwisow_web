@@ -27,10 +27,10 @@ public class AppServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private String semrush_api_key = "2fc1906300ddc89289961a1c3642a273";
+    private String semrush_api_key = "........";
     private Boolean fake_default_rep = true;
-    private Boolean fake_basicStats = false;
-    private Boolean fake_competitors = false;
+    private Boolean fake_basicStats = true;
+    private Boolean fake_competitors = true;
     
             
     protected void processServletRequest(HttpServletRequest request, HttpServletResponse response)
