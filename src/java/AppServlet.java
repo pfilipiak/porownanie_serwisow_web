@@ -27,7 +27,7 @@ public class AppServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private String semrush_api_key = "xx2fc....";
+    private String semrush_api_key = "x2fc1906300ddc89289961a1c3642a273";
     private Boolean fake_default_rep = true;
     private Boolean fake_basicStats = true;
     private Boolean fake_competitors = true;
@@ -311,6 +311,55 @@ public class AppServlet extends HttpServlet {
     }
      
      //end trends
+     
+     //organic
+      protected void processRequestToOrganicStats(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+            String website = getValueQS("website",request.getQueryString());
+            DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
+            //
+            String sqltable = "bp_produkt_saturn_zestawienie";
+            
+            switch (website) {
+                case "saturn.pl" : sqltable = "bp_produkt_saturn_zestawienie"; break;
+                case "mediamarkt.pl" : sqltable = "bp_produkt_media_markt_zestawienie"; break;
+                case "mediaexpert.pl" : sqltable = "bp_produkt_media_expert_zestawienie"; break;
+                case "euro.com.pl" : sqltable = "bp_produkt_euro_zestawienie"; break;
+                case "oleole.pl" : sqltable = "bp_produkt_oleole_zestawienie"; break;
+                case "morele.net" : sqltable = "bp_produkt_morele_zestawienie"; break;
+                //case "ceneo.pl" : sqltable = "bp_produkt_ceneo"; break;
+                default: break;
+            }
+                    
+            String query = "select time, traffic from " + sqltable + " order by time asc ";
+            String[] tableTrendsKWs = apdata.GChartOrganicWebsiteStat(website, query);
+            String tableTrendsKWsHeader = tableTrendsKWs[0];
+            String tableTrendsKWsContent = tableTrendsKWs[1];
+            //
+            
+            query = "select time, keywords from " + sqltable + " order by time asc ";
+            String[] tableKWs = apdata.GChartOrganicWebsiteStat(website, query);
+            String tableKWsHeader = tableKWs[0];
+            String tableKWsContent = tableKWs[1];
+            //
+            
+            request.setAttribute("website", website); // This will be available as ${message}
+            request.setAttribute("tableTrendsKWsHeader", tableTrendsKWsHeader); //
+            request.setAttribute("tableTrendsKWsContent", tableTrendsKWsContent); //
+            
+            request.setAttribute("tableCompKWsHeader", tableKWsHeader); //
+            request.setAttribute("tableCompKWsContent", tableKWsContent); //
+
+            
+            request.getRequestDispatcher("/reportOrganic.jsp").forward(request, response);
+        }
+    }
+     
+     //ed organic
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -337,6 +386,10 @@ public class AppServlet extends HttpServlet {
         } 
         else if (qs.contains("r=trends")) {
             processRequestToTrendsStats(request, response);
+                        
+        } 
+        else if (qs.contains("r=organic")) {
+            processRequestToOrganicStats(request, response);
                         
         } else {
             processServletRequest(request, response);

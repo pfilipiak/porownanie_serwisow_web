@@ -3,7 +3,7 @@
  
 <html>
 	<head>
-		<title>Porównywarka serwisów</title>
+		<title>Dane ogólne - Porównywarka serwisów</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="najlepsze narzędzie dla specjalistów SEO na rynku" />
 		<meta name="keywords" content="" />

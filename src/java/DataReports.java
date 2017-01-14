@@ -351,6 +351,63 @@ public class DataReports {
     }        
       
       //end trends
+    
+     //organic
+        public String[] GChartOrganicWebsiteStat(String website,String query){
+            String table[] = new String[2];
+            //staty
+            table[0] = "data.addColumn('string', 'Miesiąc');\r\n";//count(KWs) lub sum()
+            table[1] = ""; //dane do table 0 
+
+            dbConnector db = new dbConnector();
+            Boolean queryRes = false; 
+            try {
+            //------------Staty------------------------//
+            // queryRes = db.... metoda do stat
+                ArrayList<String> resList = new ArrayList<>();
+                String[] myArrayData = new String[13];
+                queryRes = db.getWebsiteTrendsReport(resList, website, query);
+
+                if (queryRes == true)
+                {
+                    myArrayData = resList.toArray(new String[0]);
+
+                    //java.util.Arrays.sort(myArrayData);
+                }
+
+                resList.clear(); 
+                //print report
+                System.out.println("Liczby zwiazane z trendem (" + myArrayData.length+ ")");
+                if (queryRes == true && myArrayData.length>1) {
+                     table[0] = table[0] +  "data.addColumn('number', '"+ website +"');\r\n";
+                    for (int k=0; k<myArrayData.length; k++) 
+                    {
+                     String data[] = myArrayData[k].split("\t");
+                     table[1] = table[1] + "['"+data[0]+ "'," + data[1]+"],\r\n" ;
+                    }
+  
+
+                    table[1] = table[1].trim();
+                    table[1] = table[1].substring(0, table[1].length()-1); 
+
+                    System.err.println("wyniki table");
+                    System.out.println( table[0] );
+                    System.out.println( table[1] );
+
+                } else {
+                     table[0] = table[0] + "data.addColumn('number', '"+website+"');\r\n";
+                     table[1] = table[1] + "['brak danych', 0]\r\n" ;
+                }
+
+
+            } catch (SQLException e) {}
+
+            return table;
+        }        
+
+    
+    
+    //end organic
 
     public Boolean getIsLive() {
         return IsLive;
