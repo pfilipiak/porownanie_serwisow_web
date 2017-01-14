@@ -15,5 +15,6 @@
         <li><a href="./Reports?r=trends&website=${website}">Trendy</a></li>     
     </ul>
     </nav>
+</div>
     
     

@@ -38,8 +38,8 @@
 				<section>
 					<header>
 						<h2>Logowanie</h2>
-                                                <br>
                                         </header>
+                                    <div id="featured">
                                                 <!--
                                                 <div id="log_panel">
                                                     <form name="logowanie" action="" method="POST" accept-charset="UTF-8" role="form">
@@ -57,10 +57,9 @@
                                                     
                                                 </div>
                                                 -->
-                                                <section class="2u"></section>
+                                                
                                                 
                                                 <!-- nowy formularz -->
-                                                <section class="6u">
                                                     <div class="log_panel">
                                                         <form name="loginform" action="" method="POST" accept-charset="UTF-8" role="form">
                                                             <fieldset>
@@ -82,11 +81,12 @@
                                                     </div>
                                                 
                                                 </section>
-                                </section>
+                                    </div>
+                                
                         </div>
-                </div>
+                
                                                 <!-- koniec formularza -->
-				
+               
 	<!-- /Main -->
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
             <script src="https://code.jquery.com/jquery.js"></script>
