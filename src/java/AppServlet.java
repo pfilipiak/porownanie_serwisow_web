@@ -27,10 +27,10 @@ public class AppServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private String semrush_api_key = "x2fc1906300ddc89289961a1c3642a273";
+    private String semrush_api_key = "2fc1906300ddc89289961a1c3642a273";
     private Boolean fake_default_rep = true;
-    private Boolean fake_basicStats = true;
-    private Boolean fake_competitors = true;
+    private Boolean fake_basicStats = false;
+    private Boolean fake_competitors = false;
     
             
     protected void processServletRequest(HttpServletRequest request, HttpServletResponse response)
@@ -152,8 +152,8 @@ public class AppServlet extends HttpServlet {
             } 
             
             if (vol != "") {
-                if (wolumen <= 5000) {vol = "AND search_volume >" + vol;}
-                if (wolumen >= 5001) {vol = "AND search_volume <=" + vol;}
+                if (wolumen <= 5000) {vol = "AND search_volume <=" + vol;}
+                if (wolumen >= 5001) {vol = "AND search_volume >=" + vol;}
                 if (wolumen == 0) {vol = "AND search_volume >= 1";}
 
             }
@@ -189,7 +189,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
             //
-            String sqltable = "bp_produkt_saturn";
+            String sqltable = " ";
             
             switch (website) {
                 case "saturn.pl" : sqltable = "bp_produkt_saturn"; break;
@@ -322,7 +322,7 @@ public class AppServlet extends HttpServlet {
             String website = getValueQS("website",request.getQueryString());
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
             //
-            String sqltable = "bp_produkt_saturn_zestawienie";
+            String sqltable = " ";
             
             switch (website) {
                 case "saturn.pl" : sqltable = "bp_produkt_saturn_zestawienie"; break;
