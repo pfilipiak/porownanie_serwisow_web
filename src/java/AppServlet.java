@@ -138,17 +138,24 @@ public class AppServlet extends HttpServlet {
             String pos = getValueQS("pos",request.getQueryString());
             String vol = getValueQS("vol",request.getQueryString());
             String signVol = "<=";
-            String signPos = "<=";
             DataReports apdata = new DataReports(semrush_api_key, fake_competitors); //true = fake API z local
+            int pozycja = Integer.parseInt(pos);
+            int wolumen = Integer.parseInt(vol);
             
             if (pos != "") {
-                if (pos.startsWith("f")) {signPos = ">="; pos = pos.substring(1);}
-                pos = " AND position" + signPos + pos;
+                if (pozycja == 1) {pos = "AND position = 1";}
+                if (pozycja > 1 && pozycja < 4) {pos = "AND position >= 2 AND position <=3";}
+                if (pozycja > 3 && pozycja < 11) {pos = "AND position >= 4 AND position <=10";}
+                if (pozycja>10) {pos = "AND position >= 10";}
+                if (pozycja<1) {pos = "AND position >= 1";}
+                
             } 
             
             if (vol != "") {
-                if (vol.startsWith("f")) {signVol = ">="; vol = vol.substring(1);}
-                vol = " AND search_volume " + signVol + vol;
+                if (wolumen > 5000) {vol = "AND search_volume >" + vol;}
+                if (wolumen <5001) {vol = "AND search_volume <=" + vol;}
+                if (pozycja<1) {vol = "AND search_volume >= 1";}
+
             }
             
             
